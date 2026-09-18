@@ -1,0 +1,801 @@
+/* ==========================================================================
+   case.css — общая система страниц-кейсов
+
+   Здесь всё, что одинаково на любом кейсе. Раскладка, уникальная для
+   конкретного кейса, лежит в css/case-<кейс>.css.
+
+   Порядок разделов:
+     1. Первый экран
+     2. Текстовые блоки (лид, аудитория, проблема, цель, …)
+     3. Блок решения: текст слева, скриншот по центру под ним
+     4. Метаданные проекта
+     5. Другие работы
+     6. Появление элементов при скролле
+     7. Боковая навигация по кейсу
+     8. Курсор-стрелка
+     Затем: адаптив (от широкого к узкому), переключатель платформы,
+     инсайт-цитата, страница политики.
+
+   Правила:
+     — размеры и цвета берём из токенов .case, не хардкодим;
+     — брейкпоинты только 1279 / 1023 / 767 / 639px, все max-width:
+         1279 — десктопный артборд переходит в поток
+         1023 — планшет
+          767 — крупный телефон
+          639 — телефон
+     — кегли текут через clamp() и достигают максимума ровно на 1280px,
+       поэтому десктоп остаётся прежним до пикселя;
+     — правки для узких экранов дописываем в блок нужного брейкпоинта,
+       а не в конец файла.
+   ========================================================================== */
+
+.case {
+  --case-w: 1200px;          /* ширина сетки макета */
+  --case-gutter: 24px;       /* горизонтальные поля контента */
+  --ink: #1e1e1e;
+  --ink-strong: #000;
+  --muted: #787878;
+  --bg-hero: #eff0f7;
+  --bg-feature: #fbfbfb;
+  --bg-plain: #fff;
+  --shot-border: #e3f1fe;
+  --shot-radius: 20px;
+  --btn-ink: #262626;
+
+  /* Типографика. Заголовки текут по ширине окна, основной текст идёт
+     ступенями: плавный боди-кегль даёт нецелые 18.7px, которые невозможно
+     проверить и хуже читаются. Каждый clamp() достигает максимума ровно
+     на 1280px — десктоп остаётся прежним до пикселя. */
+  --fs-h1:   clamp(30px, 2vw + 18.4px, 44px);     /* 1280: 25.6 + 18.4 = 44  */
+  --fs-h2:   clamp(24px, 1.1vw + 17.92px, 32px);  /* 1280: 14.08 + 17.92 = 32 */
+  --fs-h3:   clamp(18px, 0.6vw + 14.32px, 22px);  /* 1280: 7.68 + 14.32 = 22 */
+  --fs-more: clamp(18px, 0.7vw + 13.04px, 22px);  /* 1280: 8.96 + 13.04 = 22 */
+  --fs-card: clamp(20px, 0.85vw + 15.12px, 26px); /* 1280: 10.88 + 15.12 = 26 */
+  --fs-body: 20px;
+
+  font-family: 'Montserrat', sans-serif;
+  color: var(--ink);
+}
+
+@media (max-width: 1023px) { .case { --fs-body: 18px; } }
+@media (max-width: 639px) { .case { --fs-body: 17px; } }
+
+/* --- общие текстовые примитивы ------------------------------------------ */
+
+.case-h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+/* Подзаголовок внутри секции — делит длинный раздел на смысловые части */
+.case-h3 {
+  margin: 40px 0 8px;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+/* первый подзаголовок идёт сразу за h2 — лишний отступ там не нужен */
+.case-section__title + .case-h3,
+.case-h3:first-child { margin-top: 24px; }
+
+.case-text {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.case-accent { font-weight: 500; }
+
+.case-list {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+.case-list--ordered { list-style: decimal; }
+.case-list--flush { margin-top: 0; }
+.case-list li {
+  list-style: inherit;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.case-list li:last-child { margin-bottom: 0; }
+
+/* --- кнопки кейса ------------------------------------------------------- */
+
+.case-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  border: 1px solid var(--btn-ink);
+  background: transparent;
+  color: var(--btn-ink);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.55;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease-in-out,
+              color 0.2s ease-in-out,
+              border-color 0.2s ease-in-out;
+}
+.case-btn:hover {
+  background-color: var(--btn-ink);
+  color: #fff;
+}
+
+.case-btn--solid {
+  border-color: transparent;
+  background-color: var(--bg-feature);
+}
+.case-btn--solid:hover {
+  background-color: #303030;
+  color: #fff;
+}
+
+/* ==========================================================================
+   1. Первый экран
+   ========================================================================== */
+
+.case-hero {
+  background-color: var(--bg-hero);
+  overflow: hidden;
+}
+.case-hero__inner {
+  position: relative;
+  width: var(--case-w);
+  height: 934px;
+  margin: 0 auto;
+}
+.case-hero__head,
+.case-hero__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 28px;
+  width: 100%;
+  text-align: center;
+}
+.case-hero__head {
+  position: absolute;
+  top: 80px;
+  left: 0;
+}
+.case-hero__title {
+  margin: 0;
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-strong);
+}
+.case-hero__lead {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 892px;
+}
+.case-hero__lead p {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+}
+/* На телефоне ручной <br> из десктопной вёрстки рвал строки неровно
+   и оставлял последнее слово одно — переносы расставляет браузер,
+   balance выравнивает длину строк. */
+@media (max-width: 639px) {
+  .case-hero__lead br { display: none; }
+  .case-hero__lead p { text-wrap: balance; }
+}
+.case-hero__btn {
+  width: 200px;
+  height: 61px;
+}
+.case-hero__shot {
+  position: absolute;
+  top: 371px;
+  left: 137px;
+  width: 926px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+.case-hero__shot img { display: block; width: 100%; height: auto; }
+
+/* ==========================================================================
+   2. Текстовые блоки (лид, аудитория, проблема, цель, …)
+   ========================================================================== */
+
+.case-section {
+  background-color: var(--bg-plain);
+  padding: 150px var(--case-gutter);
+}
+.case-section__inner {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  /* появление текста снизу */
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.65s cubic-bezier(.25,.46,.45,.94),
+              transform 0.65s cubic-bezier(.25,.46,.45,.94);
+}
+.case-section.is-in .case-section__inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+.case-section--center .case-section__inner { text-align: center; }
+
+.case-section__title { margin-bottom: 28px; }
+
+/* когда две секции читаются как одна мысль — сокращаем разрыв между ними */
+.case-section--tight-bottom { padding-bottom: 56px; }
+.case-section--tight-top    { padding-top: 0; }
+.case-section .case-text { margin-bottom: 16px; }
+/* после списка — больше воздуха, чем между обычными абзацами */
+.case-section .case-text:has(.case-list) { margin-bottom: 32px; }
+.case-section .case-text:last-child { margin-bottom: 0; }
+
+/* ==========================================================================
+   3. Блок решения: текст слева, скриншот по центру под ним
+      Картинка показывается в своих пропорциях — не растягиваем и не режем.
+   ========================================================================== */
+.case-solution {
+  background-color: var(--bg-feature);
+  padding: 100px var(--case-gutter);
+}
+/* Ширина контейнера равна ширине скриншота — левый край текста
+   и картинки совпадают, ступеньки между ними нет. */
+.case-solution__inner {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.case-solution__text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 28px;
+  max-width: 900px;
+  margin-bottom: 56px;
+}
+/* блок решения без скриншота — отступ под текстом не нужен */
+.case-solution__text:last-child { margin-bottom: 0; }
+.case-solution__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.case-solution__shot {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: var(--shot-radius);
+  overflow: hidden;
+}
+.case-solution__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   4. Метаданные проекта
+   ========================================================================== */
+
+/* overflow не ставим: пункты появляются со сдвигом вниз на 100px, и обрезка
+   оставляла видимыми лишь 24 из 66px — на грани порога появления */
+.case-meta {
+  background-color: var(--bg-plain);
+}
+.case-meta__inner {
+  width: var(--case-w);
+  margin: 0 auto;
+  height: 164px;
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.case-meta__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4px;
+  text-align: center;
+}
+/* ширина столбцов не задана — space-between сам распределяет промежутки,
+   а края совпадают с блоком «Другие работы» (та же сетка --case-w) */
+.case-meta__label {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.case-meta__value {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   5. Другие работы
+   ========================================================================== */
+
+.case-more {
+  background-color: var(--bg-plain);
+  overflow: hidden;
+}
+.case-more__inner {
+  width: var(--case-w);
+  margin: 0 auto;
+  padding: 70px 0 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+/* заголовок и кнопка портфолио — по краям одной строки */
+/* заголовок и кнопка всегда в одной строке: заголовок при нехватке места
+   переносится сам, кнопка не сжимается */
+.case-more__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+/* карточки те же, что на главной, — сетка повторяет .projects__grid */
+.case-more__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 584px));
+  justify-content: center;
+  gap: 60px;
+}
+.case-more__title {
+  margin: 0;
+  font-size: var(--fs-more);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-strong);
+  white-space: nowrap;
+}
+.case-more__cta {
+  align-self: center;   /* под карточками, по центру */
+  flex-shrink: 0;
+  width: 220px;
+  height: 52px;
+  /* белая с тёмной обводкой — как «Открыть Behance» на первом экране;
+     без обводки на белом фоне блока кнопку не видно */
+  background-color: #fff;
+  border-color: var(--btn-ink);
+}
+/* Кнопка стоит в самом низу .case-more с overflow: hidden. Обычный сдвиг
+   появления (100px) уводил её за край блока: наблюдатель не видел кнопку,
+   и она навсегда оставалась прозрачной. Сдвиг меньше нижнего отступа блока. */
+.case-more__cta[data-reveal="up"] { transform: translateY(24px); }
+.case-more__cta[data-reveal].is-in { transform: none; }
+
+/* На десктопе кнопка стоит в одной строке с заголовком, справа.
+   В разметке она после карточек (так её место на узких экранах),
+   поэтому раскладка — сеткой: заголовок и кнопка в первой строке,
+   карточки на всю ширину во второй. */
+@media (min-width: 1280px) {
+  .case-more__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    row-gap: 48px;
+    column-gap: 16px;
+  }
+  .case-more__head { grid-column: 1; grid-row: 1; }
+  .case-more__cta  { grid-column: 2; grid-row: 1; align-self: center; }
+  .case-more__grid { grid-column: 1 / -1; grid-row: 2; }
+}
+
+.case-card {
+  position: absolute;
+  top: 152px;
+  left: var(--x, 0);
+  width: 574px;
+  height: 490px;
+  border-radius: 32px;
+  overflow: hidden;
+  background-color: var(--card-bg, #f2f2f2);
+}
+.case-card__head {
+  position: absolute;
+  top: 42px;
+  left: 40px;
+  width: 494px;
+  display: flex;
+  column-gap: 50px;
+  align-items: flex-start;
+}
+.case-card__titles {
+  width: 304px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+.case-card__name {
+  margin: 0;
+  font-size: var(--fs-card);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.case-card__descr {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.case-card__btn {
+  flex-shrink: 0;
+  width: 150px;
+  height: 43px;
+}
+.case-card__art {
+  position: absolute;
+  left: calc(var(--ax, 0px) * var(--art-k, 1));
+  top: calc(var(--ay, 0px) * var(--art-k, 1));
+  width: calc(var(--aw, 0px) * var(--art-k, 1));
+}
+.case-card__art img { display: block; width: 100%; height: auto; }
+
+/* ==========================================================================
+   6. Появление элементов
+   ========================================================================== */
+
+/* Значения дистанций, длительности и easing — как в оригинальной анимации:
+   fadeinup 100px, fadeinleft/right ±100px, zoomin scale(.9), 1s, easeOutExpo.
+   Длительность задаётся на элементе через data-reveal-dur. */
+[data-reveal] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: var(--reveal-dur, 1s);
+  transition-timing-function: cubic-bezier(.19, 1, .22, 1);
+}
+[data-reveal="up"]         { transform: translateY(100px); }
+[data-reveal="from-right"] { transform: translateX(100px); }
+[data-reveal="from-left"]  { transform: translateX(-100px); }
+[data-reveal="zoom"]       { transform: scale(.9); }
+[data-reveal].is-in        { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .case-section__inner {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   7. Боковая навигация по кейсу
+   ========================================================================== */
+
+.case-side-nav {
+  position: fixed;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.case-side-nav.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.case-side-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.case-side-nav__item a {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #c2c2c2;
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s ease;
+  transform-origin: left center;
+  white-space: nowrap;
+  line-height: 1;
+}
+.case-side-nav__item a:hover {
+  color: #555;
+  transform: scale(1.35);
+}
+.case-side-nav__item.is-active a {
+  color: #1e1e1e;
+  font-weight: 600;
+}
+@media (max-width: 1279px) { .case-side-nav { display: none; } }
+
+/* ==========================================================================
+   8. Курсор-стрелка
+   ========================================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  body, a, button { cursor: none !important; }
+}
+
+#pd-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 999998;
+  will-change: transform;
+  transform: translate(-400px, -400px);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#pd-cursor.is-visible { opacity: 1; }
+
+/* ==========================================================================
+   Адаптив: ниже 1280px раскладка перестраивается в поток
+   ========================================================================== */
+
+@media (max-width: 1279px) {
+  .case { --case-w: 100%; }
+
+  .case-hero__inner {
+    height: auto;
+    padding: 120px var(--case-gutter) 0;
+  }
+  .case-hero__head {
+    position: static;
+    width: auto;
+  }
+  .case-hero__shot {
+    position: static;
+    margin: 64px auto 0;
+    width: 100%;
+    max-width: 926px;
+  }
+
+  .case-section { padding: 100px var(--case-gutter); }
+
+  .case-meta__inner {
+    width: auto;
+    height: auto;
+    padding: 48px var(--case-gutter);   /* поля как у «Других работ» */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px 32px;
+  }
+
+  .case-more__inner { padding: 80px var(--case-gutter); gap: 32px; }
+  .case-more__grid { grid-template-columns: minmax(0, 584px); gap: 32px; }
+  .case-more__cta { align-self: center; }
+  /* Карточка: шапка уходит в поток, иначе кнопка «Открыть кейс» остаётся
+     за границей overflow:hidden и становится некликабельной.
+     Коллаж ужимается коэффициентом от собственной ширины карточки. */
+  .case-card {
+    position: static;
+    width: 100%;
+    max-width: 574px;
+    height: auto;
+    container-type: inline-size;
+    --art-k: calc(100cqw / 574px); /* 574px — ширина карточки в макете */
+    --head-band: 150px;            /* полоса, отданная под текст */
+    padding: 0 var(--case-gutter);
+  }
+  /* Распорка задаёт высоту под коллаж. Считать её на самой карточке нельзя:
+     элемент не видит собственные контейнерные единицы, cqw ушёл бы к окну. */
+  .case-card::after {
+    content: "";
+    display: block;
+    height: calc(490px * var(--art-k));
+  }
+  .case-card__head {
+    position: static;
+    width: auto;
+    min-height: var(--head-band);
+    padding-top: 32px;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 16px;
+    justify-content: space-between;
+  }
+  .case-card__titles { width: auto; flex: 1 1 220px; }
+  .case-card__btn { width: auto; min-width: 150px; padding: 0 20px; }
+  .case-card__art { top: calc(var(--head-band) + var(--ay, 0px) * var(--art-k)); }
+}
+
+@media (max-width: 1023px) {
+  .case { --case-gutter: 32px; }
+
+  /* Ручные <br> из десктопной вёрстки рвали строки неровно и оставляли одно
+     слово в строке. Здесь переносы расставляет браузер, pretty не даёт
+     последней строке остаться из одного слова. */
+  .case-text br { display: none; }
+  .case-text { text-wrap: pretty; }
+}
+
+@media (max-width: 767px) {
+  .case { --case-gutter: 24px; }
+  .case-card { --head-band: 176px; }
+
+  /* амплитуда появления: 100px на узком экране сама уводит блок за край */
+  [data-reveal="from-right"] { transform: translateX(40px); }
+  [data-reveal="from-left"]  { transform: translateX(-40px); }
+}
+
+@media (max-width: 639px) {
+  .case { --case-gutter: 20px; }
+  /* отступ сверху первого экрана — как на главной: 52px от шапки (было 120px) */
+  .case-hero__inner { padding-top: 52px; }
+
+  /* метаданные: три пары в строку не помещаются, разрешаем перенос */
+  .case-meta__label,
+  .case-meta__value { white-space: normal; }
+  .case-meta__inner { gap: 24px 32px; }
+  .case-more__title { white-space: nowrap; }   /* заголовок всегда одной строкой */
+  .case-solution { padding: 70px var(--case-gutter); }
+  .case-solution__text { margin-bottom: 36px; }
+
+  /* Метаданные списком: подпись слева, значение справа, строки разделены
+     тонкой линией. Три пары в строку на телефоне не помещались. */
+  .case-meta__inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
+    padding-block: 32px;
+  }
+  .case-meta__item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    column-gap: 16px;
+    padding: 14px 0;
+    text-align: left;
+    border-top: 1px solid rgba(30, 30, 30, 0.08);
+  }
+  .case-meta__item:last-child { border-bottom: 1px solid rgba(30, 30, 30, 0.08); }
+  .case-meta__label,
+  .case-meta__value { font-size: 16px; }
+  .case-meta__label { font-weight: 400; white-space: nowrap; }
+  .case-meta__value { text-align: right; text-wrap: balance; }
+}
+
+/* ==========================================================================
+   Переключатель платформы: две ссылки между страницами Kalimat.
+   Активный раздел — тёмная плашка.
+   ========================================================================== */
+
+.case-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 100px;
+  background-color: #fff;
+}
+.case-switch__link {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: #7d7d80;
+  padding: 18px 26px;
+  border-radius: 100px;
+  background: transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.case-switch__link:hover { color: #4a4a4d; }
+.case-switch__link.is-active {
+  background-color: #464646;
+  color: #fff;
+}
+@media (max-width: 767px) {
+  .case-switch__link { font-size: 14px; padding: 14px 20px; }
+}
+@media (max-width: 639px) {
+  .case-switch { padding: 4px; }
+  .case-switch__link { font-size: 13px; padding: 12px 16px; }
+}
+
+
+/* ==========================================================================
+   Инсайт — вынесенная мысль внутри текстовой секции
+
+   Сверху либо кавычка, либо метка — вместе они не показываются.
+   Размеры текста и метки одинаковые во всех цитатах.
+   ========================================================================== */
+
+.case-callout {
+  margin-top: 52px;
+  padding: 40px 52px;
+  border-radius: 28px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+/* кавычка над текстом */
+.case-callout::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 20px;
+  background: url("../images/icons/quote-mark.svg") no-repeat center / contain;
+}
+/* с меткой кавычка не нужна */
+.case-callout:has(.case-callout__label)::before { display: none; }
+
+.case-callout__label {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9a9a9d;
+}
+.case-callout p:not(.case-callout__label) {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #5a5a5d;
+}
+
+/* цитата отдельной секцией — отличается только отсутствием верхнего отступа */
+.case-callout--lead { margin-top: 0; }
+
+@media (max-width: 767px) {
+  .case-callout { margin-top: 40px; padding: 32px 28px; }
+  .case-callout::before { width: 38px; height: 38px; margin-bottom: 16px; }
+}
+@media (max-width: 639px) {
+  .case-callout { padding: 28px 20px; }
+  .case-callout::before { width: 34px; height: 34px; }
+}
+
+
+/* ==========================================================================
+   Страница «Политика обработки персональных данных» (privacy.html)
+   Текстовый документ: разделы плотнее, чем блоки кейсов.
+   ========================================================================== */
+.privacy-head { padding-top: clamp(64px, 8vw, 120px); padding-bottom: 24px; }
+.privacy-title { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.2; margin-bottom: 16px; }
+.privacy-date { color: var(--muted); font-size: 16px; }
+.privacy-section { padding-top: 32px; padding-bottom: 32px; }
+.privacy-section:last-of-type { padding-bottom: clamp(80px, 10vw, 140px); }
+.privacy-section .case-section__title { font-size: clamp(22px, 2vw, 28px); margin-bottom: 18px; }
+.privacy-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #b3a1d1; }
+@media (hover: hover) { .privacy-link:hover { text-decoration-color: currentColor; } }
+@media (max-width: 639px) {
+  .privacy-section { padding-top: 24px; padding-bottom: 24px; }
+}

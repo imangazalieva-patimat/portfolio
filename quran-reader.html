@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quran Reader — платформа для чтения Корана | Pati Designer</title>
+  <meta name="description" content="Кейс продуктового дизайнера: редизайн платформы для чтения и прослушивания Корана. Персонализация, закладки, режимы чтения, UX-исследование и гипотезы.">
+
+  <!-- Превью при отправке ссылки. Адрес сайта и картинку добавим вместе с доменом -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pati Designer">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Quran Reader — платформа для чтения Корана | Pati Designer">
+  <meta property="og:description" content="Кейс продуктового дизайнера: редизайн платформы для чтения и прослушивания Корана. Персонализация, закладки, режимы чтения, UX-исследование и гипотезы.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Quran Reader — платформа для чтения Корана | Pati Designer">
+  <meta name="twitter:description" content="Кейс продуктового дизайнера: редизайн платформы для чтения и прослушивания Корана. Персонализация, закладки, режимы чтения, UX-исследование и гипотезы.">
+
+  <!-- Иконка сайта -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Шрифты -->
+  <link rel="preload" href="fonts/montserrat/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/montserrat/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <!-- Стили сайта -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Стили кейсов: общая система + раскладка этой страницы -->
+  <link rel="stylesheet" href="css/case.css">
+  <link rel="stylesheet" href="css/case-quran.css">
+</head>
+<body>
+
+  <!-- Кастомный курсор-стрелка -->
+  <div id="pd-cursor" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 28 32" fill="none">
+      <path d="M3 0 L0 24 L8 17.5 L11.5 16 L20 16 Z"
+            fill="#B3A1D1" stroke="white" stroke-width="2"
+            stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Боковая навигация по кейсу -->
+  <nav class="case-side-nav" aria-label="Навигация по кейсу">
+    <ul class="case-side-nav__list">
+      <li class="case-side-nav__item"><a href="#case-audience">аудитория</a></li>
+      <li class="case-side-nav__item"><a href="#case-team">команда и&nbsp;моя роль</a></li>
+      <li class="case-side-nav__item"><a href="#case-problem">проблема</a></li>
+      <li class="case-side-nav__item"><a href="#case-goal">цель</a></li>
+      <li class="case-side-nav__item"><a href="#case-research">исследование</a></li>
+      <li class="case-side-nav__item"><a href="#case-hypotheses">гипотезы</a></li>
+      <li class="case-side-nav__item"><a href="#case-navigation">решения</a></li>
+      <li class="case-side-nav__item"><a href="#case-results">результаты</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- Шапка — как на главной, ссылки ведут обратно на портфолио -->
+  <header class="pd-nav" id="header">
+    <div class="pd-nav__inner">
+      <a href="index.html" class="pd-nav__logo">Pati Designer</a>
+      <nav>
+        <ul class="pd-nav__menu">
+          <li><a href="index.html#about"     class="pd-nav__link">Обо мне</a></li>
+          <li><a href="index.html#portfolio" class="pd-nav__link">Портфолио</a></li>
+          <li><a href="index.html#contacts"  class="pd-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#contacts" class="pd-nav__cta btn btn--dark">Написать мне</a>
+      <button class="pd-nav__burger" id="pd-nav__burger"
+              aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Меню на телефоне -->
+  <div class="pd-nav-drawer" id="pd-nav-drawer" aria-hidden="true">
+    <nav class="pd-nav-drawer__nav">
+      <ul class="pd-nav-drawer__menu">
+        <li><a href="index.html#about"     class="pd-nav-drawer__link">Обо мне</a></li>
+        <li><a href="index.html#portfolio" class="pd-nav-drawer__link">Портфолио</a></li>
+        <li><a href="index.html#contacts"  class="pd-nav-drawer__link">Контакты</a></li>
+      </ul>
+      <a href="https://t.me/pati_iman" target="_blank" rel="noopener" class="pd-nav-drawer__cta btn btn--dark">Написать мне</a>
+    </nav>
+  </div>
+
+  <main class="case">
+
+    <!-- ===== Первый экран ===== -->
+    <section class="case-hero" id="case-hero" data-nav-hide>
+      <div class="case-hero__inner">
+        <div class="case-hero__head">
+          <div class="case-hero__intro" data-reveal="up" data-reveal-dur="2">
+            <h1 class="case-hero__title">Quran Reader</h1>
+            <div class="case-hero__lead">
+              <p>Разработка онлайн-платформы для&nbsp;чтения, глубокого изучения <br>и&nbsp;эффективного запоминания&nbsp;Корана</p>
+            </div>
+          </div>
+          <a class="case-btn case-hero__btn"
+             href="https://www.behance.net/gallery/216976775/Quran-Reading-UIUX-Design"
+             target="_blank" rel="noopener"
+             data-reveal="up" data-reveal-dur="0.2" data-reveal-delay="1.5">Открыть Behance</a>
+        </div>
+        <div class="case-hero__shot" data-reveal="up">
+          <img src="images/case-quran/hero-overview.webp"
+               width="1420" height="888" alt="Интерфейс Quran Reader">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Вводный текст ===== -->
+    <section class="case-section case-section--center" id="case-intro">
+      <div class="case-section__inner">
+        <p class="case-text">
+          До&nbsp;редизайна у&nbsp;платформы уже был интерфейс, но&nbsp;в&nbsp;нём не&nbsp;хватало персонализации<br>
+          и&nbsp;быстрых сценариев для&nbsp;возвращения к&nbsp;важным местам. Пользователь мог<br>
+          читать и&nbsp;слушать Коран, но&nbsp;ему было сложно работать с&nbsp;текстом более глубоко.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Аудитория ===== -->
+    <section class="case-section" id="case-audience">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Аудитория</h2>
+        <p class="case-text">Основная аудитория продукта&nbsp;— русскоязычные мусульмане, которые читают и&nbsp;слушают Коран онлайн.</p>
+        <p class="case-text">Для&nbsp;этой аудитории важно, чтобы интерфейс был спокойным, понятным и&nbsp;не&nbsp;перегружал чтение. Пользователь приходит не&nbsp;просто «посмотреть контент», а&nbsp;взаимодействовать с&nbsp;текстом внимательно и&nbsp;регулярно.</p>
+      </div>
+    </section>
+
+    <!-- ===== Команда и моя роль ===== -->
+    <section class="case-section" id="case-team">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Команда и&nbsp;моя роль</h2>
+        <p class="case-text">Над&nbsp;проектом работали разработчик и&nbsp;я&nbsp;как&nbsp;UI/UX-дизайнер.</p>
+        <p class="case-text">Я&nbsp;отвечала не&nbsp;только за&nbsp;визуальный интерфейс, но&nbsp;и&nbsp;участвовала в&nbsp;формировании структуры продукта и&nbsp;логики функций. В&nbsp;мою зону ответственности входили UX-исследование, анализ старого интерфейса, бенчмаркинг, гипотезы, пользовательские сценарии, прототипы и&nbsp;финальный UI-дизайн.</p>
+      </div>
+    </section>
+
+    <!-- ===== Проблема ===== -->
+    <section class="case-section" id="case-problem">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Проблема</h2>
+        <p class="case-text">Главная проблема старого интерфейса&nbsp;— отсутствие персонализации. <br>Из-за&nbsp;этого платформа работала как&nbsp;инструмент для&nbsp;разового чтения, но&nbsp;хуже поддерживала регулярное возвращение и&nbsp;глубокое изучение.</p>
+        <div class="case-text">Особенно заметны были несколько проблем:
+          <ul class="case-list">
+            <li>пользователь мог потерять место, на&nbsp;котором остановился;</li>
+            <li>не&nbsp;было удобного сценария для&nbsp;возвращения к&nbsp;недавно прочитанному;</li>
+            <li>не&nbsp;хватало системы закладок для&nbsp;сохранения важных аятов;</li>
+            <li>быстрый доступ к&nbsp;словам и&nbsp;их&nbsp;значениям был ограничен;</li>
+            <li>разные сценарии чтения и&nbsp;прослушивания не&nbsp;были достаточно связаны между собой.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Цель ===== -->
+    <section class="case-section" id="case-goal">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Цель</h2>
+        <p class="case-text">Целью редизайна было сделать Quran Reader более удобным для&nbsp;регулярного чтения и&nbsp;прослушивания Корана.</p>
+        <div class="case-text">Я&nbsp;сфокусировалась на&nbsp;трёх направлениях:
+          <ol class="case-list case-list--ordered">
+            <li>Упростить навигацию и&nbsp;возвращение к&nbsp;нужным местам.</li>
+            <li>Добавить персонализацию через закладки и&nbsp;недавно прочитанное.</li>
+            <li>Улучшить сценарии чтения через разные режимы отображения текста и&nbsp;быстрый доступ к&nbsp;словам.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Исследование ===== -->
+    <section class="case-section" id="case-research">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Исследование</h2>
+        <p class="case-text">Я&nbsp;начала с&nbsp;анализа старого интерфейса и&nbsp;изучения пользовательских ожиданий. Для&nbsp;этого смотрела отзывы, форумы и&nbsp;конкурентов, чтобы понять, какие функции чаще всего нужны людям при&nbsp;чтении Корана онлайн.</p>
+        <p class="case-text">После исследования стало понятно, что&nbsp;пользователю важно не&nbsp;только открыть текст, но&nbsp;и&nbsp;иметь личное пространство внутри продукта: сохранять аяты, возвращаться к&nbsp;ним, продолжать чтение и&nbsp;выбирать удобный формат восприятия.</p>
+      </div>
+    </section>
+
+    <!-- ===== Гипотезы ===== -->
+    <section class="case-section" id="case-hypotheses">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Гипотезы</h2>
+        <div class="case-text"><span class="case-accent">На&nbsp;основе этого я&nbsp;сформировала несколько гипотез:</span>
+          <ul class="case-list">
+            <li>блок «Недавно прочитано» поможет пользователю быстрее вернуться к&nbsp;месту чтения;</li>
+            <li>система закладок повысит персонализацию и&nbsp;упростит доступ к&nbsp;важным фрагментам;</li>
+            <li>разные режимы чтения позволят адаптировать интерфейс под&nbsp;разные задачи: чтение оригинального текста, понимание смысла, изучение слов;</li>
+            <li>быстрый доступ к&nbsp;переводу слов сделает чтение полезнее для&nbsp;тех, кто изучает арабский или&nbsp;хочет глубже понимать текст.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 1. Улучшенная навигация ===== -->
+    <section class="case-solution" id="case-navigation">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Улучшенная навигация</h2>
+          <div class="case-solution__body">
+            <p class="case-text"><strong>Умный поиск</strong>: позволяет быстро находить нужные тексты по&nbsp;названию, номеру главы или&nbsp;отдельным словам.</p>
+            <p class="case-text"><strong>Переосмысленная главная страница</strong>: главная зона чтения теперь разделена на&nbsp;несколько понятных блоков&nbsp;— текстовые главы, избранное и&nbsp;сборник молитв.</p>
+            <p class="case-text">Такая структура помогает пользователям легко ориентироваться и&nbsp;быстрее находить нужный раздел.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-quran/surah-list.webp" width="2440" height="1800" loading="lazy" alt="Экран со списком сур и поиском">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 2. Недавно прочитано ===== -->
+    <section class="case-solution" id="case-recent">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Недавно прочитано</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Одним из&nbsp;важных решений стало добавить раздел «Недавно прочитано».</p>
+            <p class="case-text">Пользователи могли терять место, на&nbsp;котором остановились, особенно если читали Коран не&nbsp;за&nbsp;один подход. Поэтому я&nbsp;спроектировала быстрый сценарий возвращения к&nbsp;последним открытым сурам и&nbsp;аятам.</p>
+            <p class="case-text">Это&nbsp;решение снижает трение при&nbsp;повторном входе: пользователю не&nbsp;нужно заново искать нужную суру или&nbsp;вспоминать, где он&nbsp;остановился. Он&nbsp;может сразу продолжить чтение.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-quran/recently-read.webp" width="1874" height="1590" loading="lazy" alt="Блок «Недавно прочитано» на главном экране">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 3. Режимы чтения ===== -->
+    <section class="case-solution" id="case-modes">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Режимы чтения</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Я&nbsp;также проработала разные режимы чтения: режим мусхафа и&nbsp;режим перевода.</p>
+            <ul class="case-list case-list--flush">
+            <li><strong>Режим мусхафа</strong> нужен для&nbsp;тех, кто хочет читать Коран в&nbsp;привычном порядке и&nbsp;воспринимать текст ближе к&nbsp;печатному формату.</li>
+            <li><strong>Режим перевода</strong> помогает тем, кто хочет глубже понимать смысл и&nbsp;работать с&nbsp;текстом более осознанно.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-quran/reading-modes.webp" width="2036" height="1624" loading="lazy" alt="Режим мусхафа и режим перевода">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 4. Персональные закладки ===== -->
+    <section class="case-solution" id="case-bookmarks">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Персональные закладки</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Я&nbsp;спроектировала раздел, где пользователь сохраняет важные аяты и&nbsp;фрагменты текста, чтобы вернуться к&nbsp;ним в&nbsp;любой момент.</p>
+            <p class="case-text">Для&nbsp;наглядности закладки можно группировать по&nbsp;папкам, каждая из&nbsp;которых выделяется своим цветом&nbsp;— это&nbsp;помогает быстро ориентироваться даже при&nbsp;большом количестве сохранений.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-quran/bookmarks-panel.webp" width="1602" height="1352" loading="lazy" alt="Раздел с персональными закладками">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Закладки: лента скринов, страница едет вниз — ряд влево ===== -->
+    <section class="case-gallery" id="case-bookmarks-gallery" data-nav-hide>
+      <div class="case-gallery__intro" data-reveal="up">
+        <p class="case-text">Закладки можно распределять по&nbsp;папкам для&nbsp;быстрого доступа <br>и&nbsp;создавать тематические группы. <br>Например, если человек ежедневно читает определённые главы, <br>он&nbsp;может добавить их&nbsp;в&nbsp;закладки и&nbsp;создать папку «Ежедневно»&nbsp;— <br>и&nbsp;все нужные тексты будут собраны в&nbsp;одном месте.</p>
+      </div>
+
+      <div class="case-gallery__scroller" data-travel="auto">
+        <div class="case-gallery__stage">
+          <div class="case-gallery__track">
+            <img loading="lazy" src="images/case-quran/bookmarks-3.webp" width="1814" height="1300"
+                 alt="Закладки: список сохранённых аятов">
+            <img loading="lazy" src="images/case-quran/bookmarks-1.webp" width="1814" height="1300"
+                 alt="Закладки: папки по темам">
+            <img loading="lazy" src="images/case-quran/bookmarks-2.webp" width="1814" height="1300"
+                 alt="Закладки: создание новой папки">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 5. Аудиоплеер ===== -->
+    <section class="case-solution" id="case-audio">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Аудиоплеер</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Так как&nbsp;один из&nbsp;главных сценариев платформы&nbsp;— прослушивание Корана, я&nbsp;отдельно проработала аудиоплеер.</p>
+            <p class="case-text">Пользователь может слушать выбранные аяты, переключаться между чтецами и&nbsp;использовать прослушивание как&nbsp;часть чтения или&nbsp;повторения. Это&nbsp;делает платформу удобной не&nbsp;только для&nbsp;визуального чтения, но&nbsp;и&nbsp;для&nbsp;аудиального восприятия текста.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-quran/audioplayer.webp" width="2036" height="1624" loading="lazy" alt="Аудиоплеер с выбором чтеца">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 6. Мгновенный перевод слова ===== -->
+    <section class="case-solution" id="case-translate">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Мгновенный перевод слова</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Часть аудитории хочет понимать отдельные слова из&nbsp;Корана, поэтому я&nbsp;предусмотрела быстрый доступ к&nbsp;значению слова прямо в&nbsp;процессе чтения.</p>
+            <p class="case-text">Это&nbsp;особенно важно для&nbsp;пользователей, которые читают арабский текст и&nbsp;хотят не&nbsp;переключаться между разными режимами или&nbsp;страницами, а&nbsp;быстро получить подсказку в&nbsp;контексте.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-quran/moment-translate.webp" width="2020" height="1612" loading="lazy" alt="Всплывающий перевод отдельного слова">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Результаты ===== -->
+    <section class="case-section" id="case-results">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Результаты</h2>
+        <p class="case-text">В&nbsp;результате был спроектирован обновлённый интерфейс, который поддерживает не&nbsp;только базовое чтение и&nbsp;прослушивание, но&nbsp;и&nbsp;более глубокое персональное взаимодействие с&nbsp;текстом.</p>
+        <p class="case-text">Главная ценность редизайна&nbsp;— в&nbsp;переходе от&nbsp;обычного сайта для&nbsp;чтения к&nbsp;персонализированной платформе, которая помогает пользователю возвращаться к&nbsp;чтению, сохранять важное и&nbsp;глубже понимать текст.</p>
+      </div>
+    </section>
+
+    <!-- ===== Бизнес-результат ===== -->
+    <section class="case-section" id="case-business">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Бизнес-результат</h2>
+        <p class="case-text">Редизайн был направлен на&nbsp;рост удержания и&nbsp;вовлечённости пользователей.</p>
+        <div class="case-text"><span class="case-accent">Ключевые метрики, на&nbsp;которые могли повлиять решения:</span>
+          <ul class="case-list">
+            <li><span class="case-accent">Retention</span> — за&nbsp;счёт функции «Недавно прочитано» пользователь быстрее возвращается к&nbsp;месту чтения.</li>
+            <li><span class="case-accent">Session duration</span> — режимы чтения, аудиоплеер и&nbsp;перевод слов увеличивают глубину взаимодействия с&nbsp;текстом.</li>
+            <li><span class="case-accent">Engagement</span> — закладки и&nbsp;недавно прочитанное создают больше осмысленных действий внутри продукта.</li>
+            <li><span class="case-accent">Feature adoption</span> — можно отслеживать использование закладок, аудиоплеера, поиска и&nbsp;режимов чтения.</li>
+          </ul>
+        </div>
+        <p class="case-text">Основной ожидаемый эффект&nbsp;— рост повторных сессий и&nbsp;регулярного использования платформы за&nbsp;счёт персонализации и&nbsp;быстрого возврата к&nbsp;чтению.</p>
+      </div>
+    </section>
+
+    <!-- ===== Метаданные проекта ===== -->
+    <section class="case-meta" id="case-meta" data-nav-hide>
+      <div class="case-meta__inner">
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Тип проекта</span>
+          <span class="case-meta__value">Веб-сайт</span>
+        </div>
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Инструмент</span>
+          <span class="case-meta__value">Figma</span>
+        </div>
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Год</span>
+          <span class="case-meta__value">2024</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Другие работы ===== -->
+    <section class="case-more" id="case-more" data-nav-hide>
+      <div class="case-more__inner">
+        <div class="case-more__head">
+          <h2 class="case-more__title" data-reveal="up">Посмотри другие мои работы</h2>
+        </div>
+
+        <div class="case-more__grid">
+        <div class="project-card project-card--kalimat-app">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-purple.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Kalimat</h3>
+              <p class="project-card__desc">Дизайн мобильного приложения <br>для&nbsp;изучения арабского языка</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Мобильное приложение</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/case-kalimat/mobile-library.webp" alt="Экран «Библиотека» в приложении Kalimat" class="project-card__img project-card__img--back">
+            <img loading="lazy" src="images/case-kalimat/dict-main.webp" alt="Экран словаря в приложении Kalimat" class="project-card__img project-card__img--front">
+          </div>
+          <a href="kalimat-app.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Kalimat</span>
+                <a href="kalimat-app.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна кроссплатформенного мобильного приложения для&nbsp;изучения арабского языка</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card project-card--onbook">
+          <div class="project-card__dot"><img loading="lazy" src="images/icons/dot-teal.svg" alt=""></div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">OnBook</h3>
+              <p class="project-card__desc">UI/UX дизайн админ-панели <br>для&nbsp;библиотеки аудиокниг</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Дашборд</span>
+              <span class="project-tag">Админ-панель</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/projects/onbook.webp" alt="Дашборд админ-панели OnBook" class="project-card__img project-card__img--back">
+            <img loading="lazy" src="images/projects/onbook.webp" alt="Дашборд админ-панели OnBook" class="project-card__img project-card__img--front">
+          </div>
+          <a href="onbook.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">OnBook</span>
+                <a href="onbook.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Редизайн админ-панели OnBook: сократила время загрузки аудиокниги с&nbsp;часа до&nbsp;нескольких минут</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        <a class="case-btn case-btn--solid case-more__cta"
+           href="index.html#portfolio" data-reveal="up">Открыть портфолио</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Прелоадер, бургер-меню, курсор главной -->
+  <script src="js/main.js"></script>
+  <!-- Логика кейса -->
+  <script src="js/case.js"></script>
+
+</body>
+</html>

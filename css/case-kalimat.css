@@ -1,0 +1,298 @@
+/* ==========================================================================
+   Кейс «Kalimat» — раскладка, уникальная для этой страницы.
+   Общие компоненты — в css/case.css, подключается перед этим файлом.
+   ========================================================================== */
+
+/* Хэдер под цвет первого экрана */
+.pd-nav { --pd-bar: 239, 240, 247; }
+
+/* ==========================================================================
+   Блоки-решений: текст сверху, скриншот под ним (общая раскладка — в case.css)
+   ========================================================================== */
+
+/* Скриншоты решений — в рамке цвета кейса */
+.case-solution__shot {
+  border: 4px solid var(--shot-border);
+}
+
+/* Ряд вертикальных мокапов: прокручивается по горизонтали самим пользователем.
+   Автоматической прокрутки и залипания нет — только жест или трекпад.
+   Крайним снимкам заданы auto-отступы: пока ряд уже контейнера, он стоит
+   по центру, а при переполнении отступы схлопываются в ноль и ничего
+   не срезается — с justify-content: center начало ряда было бы недоступно. */
+.case-solution__shots {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  padding-bottom: 12px;
+}
+.case-solution__shots img {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(200px, 26vw, 281px);
+  height: auto;
+  scroll-snap-align: center;
+}
+.case-solution__shots img:first-child { margin-left: auto; }
+.case-solution__shots img:last-child  { margin-right: auto; }
+
+@media (max-width: 1023px) {
+  .case-solution__shots { gap: 20px; }
+}
+
+@media (max-width: 767px) {
+  /* на телефоне ряд заведомо шире экрана — прокручивается жестом */
+  .case-solution__shots img { width: clamp(180px, 55vw, 240px); }
+}
+
+/* ==========================================================================
+   Лента мокапов «Словаря» — как дашборд в OnBook: страница прокручивается
+   вниз, а ряд экранов едет влево до последнего снимка.
+   Путь и высоту блока считает case.js по ширине ряда (data-travel="auto").
+   ВАЖНО: у предков сцены не должно быть overflow — иначе sticky отключится.
+   ========================================================================== */
+
+.case-track__stage {
+  --shot-h: 580px;
+  position: sticky;
+  top: calc(50vh - var(--shot-h) / 2);
+  height: var(--shot-h);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);   /* на всю ширину окна, шире колонки текста */
+  overflow: hidden;
+}
+.case-track__track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  height: 100%;
+  /* первый экран стоит по левому краю колонки текста */
+  padding: 0 max(24px, calc((100vw - 1000px) / 2));
+  will-change: transform;
+}
+.case-track__track img {
+  display: block;
+  flex: 0 0 auto;
+  width: 281px;
+  height: auto;
+}
+
+/* ниже 1280 — без залипания: ряд прокручивается жестом, как у OnBook */
+@media (max-width: 1279px) {
+  .case-track__stage {
+    position: static;
+    height: auto;
+    width: auto;
+    margin-left: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+  .case-track__track { height: auto; gap: 20px; padding: 0 0 12px; transform: none !important; }
+  .case-track__track img { width: clamp(180px, 42vw, 260px); }
+}
+
+/* ==========================================================================
+   Первый экран: три экрана веером — центральный крупнее и поверх остальных
+
+   Центрируем через left/right + margin: auto, а не transform —
+   transform занят анимацией появления (data-reveal).
+   ========================================================================== */
+
+/* внешний слой отвечает за положение, внутренний — за появление:
+   transform у каждого свой и они не конфликтуют */
+.case-hero__gallery {
+  position: absolute;
+  top: 371px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+.case-hero__gallery-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.case-hero__screen {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 26px;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(30, 30, 40, 0.12);
+}
+.case-hero__screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+/* лёгкая дымка поверх скриншотов */
+.case-hero__screen::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 16px;
+  background-color: rgba(239, 240, 247, 0.27);
+  pointer-events: none;
+}
+
+.case-hero__screen--main {
+  width: 700px;
+  z-index: 2;
+}
+.case-hero__screen--side {
+  width: 574px;
+  z-index: 1;
+  margin-top: 64px;
+}
+.case-hero__screen--left  { margin-right: -134px; transform: rotate(-4deg); }
+.case-hero__screen--right { margin-left:  -134px; transform: rotate(4deg); }
+
+/* Вертикальные кадры выше горизонтальных, поэтому ряд поднят и ужат:
+   первый экран 934px высотой, галерея начинается на 371px — на композицию
+   остаётся 563px, а с подъёмом 603px. Центральный: 290 × 1660 / 836 = 576px. */
+.case-hero__gallery-row--mobile { margin-top: -40px; }
+.case-hero__gallery-row--mobile .case-hero__screen--main { width: 290px; }
+.case-hero__gallery-row--mobile .case-hero__screen--side { width: 256px; margin-top: 44px; }
+.case-hero__gallery-row--mobile .case-hero__screen--left  { margin-right: -40px; }
+.case-hero__gallery-row--mobile .case-hero__screen--right { margin-left:  -40px; }
+
+/* Ниже 1280 веер шире контейнера, поэтому размеры задаются долей от ширины
+   окна: размер_в_макете / 1800 × 100vw. Раньше здесь был множитель
+   calc(100vw / 1650px) — делить длину на длину в CSS нельзя, и мобильный ряд
+   раздувался до 2516px на любой ширине. */
+@media (max-width: 1279px) {
+  .case-hero__gallery {
+    position: static;
+    margin: 64px auto 0;
+    transform: none;
+    width: auto;   /* max-content вместе с детьми в vw давал замкнутый расчёт */
+  }
+  .case-hero__screen--main { width: 38.9vw; }                        /* 700 / 1800 */
+  .case-hero__screen--side { width: 31.9vw; margin-top: 3.6vw; }     /* 574, 64 */
+  .case-hero__screen--left  { margin-right: -7.4vw; }                /* -134 */
+  .case-hero__screen--right { margin-left:  -7.4vw; }
+  .case-hero__screen { padding: 0.67vw; border-radius: 1.4vw; }
+  .case-hero__screen::after { inset: 0.67vw; border-radius: 0.9vw; }
+  .case-hero__screen img { border-radius: 0.9vw; }
+
+  /* вертикальные мокапы: 290 и 256 в макете, с множителем 2.2 */
+  .case-hero__gallery-row--mobile { margin-top: -4.9vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--main { width: 35.4vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--side { width: 31.3vw; margin-top: 5.4vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--left  { margin-right: -4.9vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--right { margin-left:  -4.9vw; }
+}
+
+/* На телефоне веер остаётся веером, только мельче: столбец растягивал
+   первый экран до 2688px. Доли те же, но база 1650 — ряд влезает в экран. */
+@media (max-width: 767px) {
+  .case-hero__screen--main { width: 42.4vw; }                      /* 700 / 1650 */
+  .case-hero__screen--side { width: 34.8vw; margin-top: 3.9vw; }
+  .case-hero__screen--left  { margin-right: -8.1vw; }
+  .case-hero__screen--right { margin-left:  -8.1vw; }
+
+  .case-hero__gallery-row--mobile { margin-top: -5.3vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--main { width: 38.7vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--side { width: 34.1vw; margin-top: 5.9vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--left  { margin-right: -5.3vw; }
+  .case-hero__gallery-row--mobile .case-hero__screen--right { margin-left:  -5.3vw; }
+}
+
+/* Веб-скриншоты широкие и низкие: в обычном веере на телефоне основной экран
+   выходил ~165px и не читался. Здесь он занимает 80% ширины (не больше 620px),
+   а боковые выглядывают из-за него и на телефоне уходят за край — первый экран
+   обрезает их (overflow у .case-hero). Все размеры — доли от --m, поэтому
+   пропорции веера одинаковы на любой ширине. Порог 1023, а не 767: иначе
+   на 768–1023 экран снова сжимался вдвое. Мобильный ряд этими правилами не задет. */
+@media (max-width: 1023px) {
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) {
+    --m: min(80vw, 620px);
+    justify-content: center;
+  }
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) .case-hero__screen--main {
+    width: var(--m);
+    padding: calc(var(--m) * 0.02);
+    border-radius: calc(var(--m) * 0.0375);
+  }
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) .case-hero__screen--side {
+    width: calc(var(--m) * 0.775);
+    margin-top: calc(var(--m) * 0.0875);
+    padding: calc(var(--m) * 0.016);
+    border-radius: calc(var(--m) * 0.0325);
+  }
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) .case-hero__screen--left  { margin-right: calc(var(--m) * -0.575); }
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) .case-hero__screen--right { margin-left:  calc(var(--m) * -0.575); }
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) .case-hero__screen::after { inset: calc(var(--m) * 0.02); border-radius: calc(var(--m) * 0.0225); }
+  .case-hero__gallery-row:not(.case-hero__gallery-row--mobile) .case-hero__screen img { border-radius: calc(var(--m) * 0.0225); }
+}
+
+/* ==========================================================================
+   Появление первого экрана: центральный экран выезжает снизу, следом
+   из-под него разъезжаются боковые.
+
+   У боковых уже есть собственный поворот, поэтому конечное состояние
+   задаём вручную — общее правило [data-reveal].is-in { transform: none }
+   стёрло бы наклон.
+   ========================================================================== */
+
+.case-hero__screen[data-reveal="fan-left"],
+.case-hero__screen[data-reveal="fan-right"] {
+  transition-timing-function: cubic-bezier(.22, 1, .3, 1);
+}
+
+.case-hero__screen--left[data-reveal="fan-left"] {
+  transform: translateX(150px) scale(0.94) rotate(0deg);
+}
+.case-hero__screen--left[data-reveal="fan-left"].is-in {
+  transform: rotate(-4deg);
+}
+
+.case-hero__screen--right[data-reveal="fan-right"] {
+  transform: translateX(-150px) scale(0.94) rotate(0deg);
+}
+.case-hero__screen--right[data-reveal="fan-right"].is-in {
+  transform: rotate(4deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-hero__screen--left[data-reveal="fan-left"],
+  .case-hero__screen--left[data-reveal="fan-left"].is-in { transform: rotate(-4deg) !important; }
+  .case-hero__screen--right[data-reveal="fan-right"],
+  .case-hero__screen--right[data-reveal="fan-right"].is-in { transform: rotate(4deg) !important; }
+}
+
+/* --- Ряд мобильных экранов: вертикальные кадры, размеры свои ---
+   У мокапов телефона своя рамка, поэтому белая подложка и дымка,
+   которые обрамляют веб-скриншоты, здесь только мешают. */
+.case-hero__gallery-row--mobile .case-hero__screen {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  overflow: visible;
+  /* тень рисуется по прямоугольнику блока, а у мокапа фон прозрачный —
+     без подложки она читалась бы серым прямоугольником за телефоном */
+  box-shadow: none;
+}
+.case-hero__gallery-row--mobile .case-hero__screen::after { display: none; }
+.case-hero__gallery-row--mobile .case-hero__screen img { border-radius: 0; }
+
+
+/* Переключатель платформы стоит над заголовком — приподнимаем его к шапке,
+   не сдвигая заголовок: relative вместо margin, иначе поедет весь стек. */
+.case-hero__head .case-switch {
+  position: relative;
+  top: -24px;
+}
+@media (max-width: 639px) {
+  /* на телефоне отступ задан ровно 52px — подъём переключателя его съедал бы */
+  .case-hero__head .case-switch { top: 0; }
+
+  /* Скрины первого экрана упирались в нижний край блока — отступ 40px.
+     Страница приложения (мобильный ряд) этим правилом не задета. */
+  .case-hero__gallery:not(:has(.case-hero__gallery-row--mobile)) { padding-bottom: 40px; }
+}

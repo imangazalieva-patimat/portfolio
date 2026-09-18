@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Патимат Имангазалиева — Product Designer | AI-Native</title>
+  <meta name="description" content="Патимат Имангазалиева — продуктовый дизайнер. Проектирование цифровых продуктов, UX/UI, дизайн-системы и AI-инструменты.">
+
+  <!-- Превью при отправке ссылки. Адрес сайта и картинку добавим вместе с доменом -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pati Designer">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Патимат Имангазалиева — Product Designer | AI-Native">
+  <meta property="og:description" content="Патимат Имангазалиева — продуктовый дизайнер. Проектирование цифровых продуктов, UX/UI, дизайн-системы и AI-инструменты.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Патимат Имангазалиева — Product Designer | AI-Native">
+  <meta name="twitter:description" content="Патимат Имангазалиева — продуктовый дизайнер. Проектирование цифровых продуктов, UX/UI, дизайн-системы и AI-инструменты.">
+  <!-- Иконка сайта -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preload" href="fonts/montserrat/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/montserrat/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Микроразметка для поисковиков -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Имангазалиева Патимат",
+    "alternateName": "Pati Designer",
+    "jobTitle": "Продуктовый дизайнер",
+    "description": "Продуктовый дизайнер: UX-исследования, интерфейсы веб-сервисов и мобильных приложений, дизайн-системы",
+    "knowsAbout": [
+      "Продуктовый дизайн",
+      "UX-исследования",
+      "UI-дизайн",
+      "Дизайн-системы",
+      "Мобильные приложения"
+    ],
+    "sameAs": [
+      "https://t.me/pati_iman",
+      "https://www.behance.net/pati_designer",
+      "https://dprofile.ru/pati_iman",
+      "https://setka.ru/users/019d2b02-72eb-73b0-8b9d-eee7eaf6be83"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Прелоадер -->
+  <div id="preloader">
+    <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+      <circle id="pl-dot" cx="49" cy="29" r="11" fill="white"/>
+      <path id="pl-path"
+        d="M 49 55 L 49 158
+           C 49 85 125 85 125 158
+           C 125 85 200 85 200 158"
+        fill="none" stroke="white"
+        stroke-width="15"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- Курсор-стрелка -->
+
+  <!-- Шапка -->
+  <header class="pd-nav" id="header">
+    <div class="pd-nav__inner">
+      <a href="index.html" class="pd-nav__logo">Pati Designer</a>
+      <nav>
+        <ul class="pd-nav__menu">
+          <li><a href="#about"     class="pd-nav__link">Обо мне</a></li>
+          <li><a href="#portfolio" class="pd-nav__link">Портфолио</a></li>
+          <li><a href="#contacts"  class="pd-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+      <a href="#contacts" class="pd-nav__cta btn btn--dark">Написать мне</a>
+      <button class="pd-nav__burger" id="pd-nav__burger"
+              aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Меню на телефоне -->
+  <div class="pd-nav-drawer" id="pd-nav-drawer" aria-hidden="true">
+    <nav class="pd-nav-drawer__nav">
+      <ul class="pd-nav-drawer__menu">
+        <li><a href="#about"     class="pd-nav-drawer__link">Обо мне</a></li>
+        <li><a href="#portfolio" class="pd-nav-drawer__link">Портфолио</a></li>
+        <li><a href="#contacts"  class="pd-nav-drawer__link">Контакты</a></li>
+      </ul>
+      <a href="https://t.me/pati_iman" target="_blank" rel="noopener" class="pd-nav-drawer__cta btn btn--dark">Написать мне</a>
+    </nav>
+  </div>
+
+
+  <!-- Первый экран -->
+  <section class="hero" id="about">
+    <div class="hero__content">
+      <div class="hero__text">
+        <div class="hero__headline">
+          <p class="hero__greeting" data-animate data-delay="0">Привет! Меня зовут Патя</p>
+          <h1 class="hero__title" data-animate data-delay="1">Я&nbsp;— продуктовый дизайнер</h1>
+        </div>
+        <p class="hero__desc" data-animate data-delay="2">Превращаю идеи в&nbsp;понятные и&nbsp;эффективные <br>цифровые продукты&nbsp;— от&nbsp;концепции до&nbsp;запуска.</p>
+      </div>
+      <div class="hero__cta" data-animate data-delay="3">
+        <a href="https://t.me/pati_iman" target="_blank" rel="noopener" class="btn btn--icon">Telegram <img src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+        <a href="https://setka.ru/users/019d2b02-72eb-73b0-8b9d-eee7eaf6be83" target="_blank" rel="noopener" class="btn btn--icon">Сетка <img src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+        <a href="https://drive.google.com/file/d/1l3xo_ZAtFAG8fn6SFdJlxQMo6K0Da0SA/view?usp=sharing" target="_blank" rel="noopener" class="btn btn--icon">CV <img src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+      </div>
+    </div>
+    <div class="hero__illustration" aria-hidden="true">
+      <img src="images/hero-illustration.webp" alt="Иллюстрация: рука с лупой рассматривает интерфейс с графиками">
+    </div>
+  </section>
+
+
+  <!-- Обо мне.
+       Обёртка #about-inner нужна шапке: выше неё пункты меню не подсвечиваются.
+       Разметка блока одна на все ширины: от 981px — раскладка макета 1200px
+       в vw, ниже — обычный поток. -->
+  <div id="about-inner">
+  <div class="pd-ab-wrap" id="pd-ab">
+
+    <div class="pd-figma-stat">
+      <span class="pd-figma-stat-main">&gt;2 лет</span>
+      <span class="pd-figma-stat-dim">в&nbsp;дизайне интерфейсов</span>
+      <span class="pd-figma-stat-dim">и&nbsp;визуальных коммуникациях</span>
+    </div>
+
+    <div class="pd-ab-cards">
+      <div class="pd-ab-group pd-ab-group--1">
+        <div class="pd-ab-card">
+          <span class="pd-ab-label">AI Native</span>
+        </div>
+      </div>
+      <div class="pd-ab-group pd-ab-group--2">
+        <div class="pd-ab-card">
+          <span class="pd-ab-label">UI/UX</span>
+        </div>
+      </div>
+      <div class="pd-ab-group pd-ab-group--3">
+        <div class="pd-ab-card">
+          <span class="pd-ab-label">Product Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Бегущая строка -->
+    <div class="pd-ab-ticker" aria-hidden="true">
+      <div class="pd-ab-ticker-track">
+        <span class="pd-ab-ticker-item">Pati Designer</span>
+        <span class="pd-ab-ticker-item">Pati Designer</span>
+        <span class="pd-ab-ticker-item">Pati Designer</span>
+        <span class="pd-ab-ticker-item">Pati Designer</span>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  <!-- /#about-inner -->
+
+  <!-- Портфолио -->
+  <section class="projects" id="portfolio">
+    <div class="projects__inner">
+      <h2 class="projects__title" data-animate>Мои проекты</h2>
+      <div class="projects__grid">
+
+        <div class="project-card project-card--left project-card--quran" data-animate data-delay="1">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-blue.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Quran Reader</h3>
+              <p class="project-card__desc">Дизайн <span class="nowrap">онлайн-платформы</span> для&nbsp;чтения и&nbsp;прослушивания Корана</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Веб-сайт</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/projects/quran-reader.webp" alt="Интерфейс Quran Reader: поиск по Корану и список сур" class="project-card__img">
+          </div>
+          <a href="quran-reader.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Quran Reader</span>
+                <a href="quran-reader.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна интерфейса для&nbsp;чтения, глубокого изучения и&nbsp;эффективного запоминания Корана</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card project-card--right project-card--kalimat" data-animate data-delay="2">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-purple.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Kalimat</h3>
+              <p class="project-card__desc">Дизайн образовательной платформы <br>для&nbsp;изучения арабского языка</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Веб-сайт</span>
+              <span class="project-tag">Личный кабинет</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/case-kalimat/hero-course.webp" alt="Страница курса Kalimat с уроками и навыками" class="project-card__img">
+          </div>
+          <a href="kalimat.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Kalimat</span>
+                <a href="kalimat.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна образовательной платформы для&nbsp;изучения арабского языка</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card project-card--left project-card--onbook" data-animate data-delay="1">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-teal.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">OnBook</h3>
+              <p class="project-card__desc">UI/UX дизайн админ-панели <br>для&nbsp;библиотеки аудиокниг</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Дашборд</span>
+              <span class="project-tag">Админ-панель</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/projects/onbook.webp" alt="Дашборд админ-панели OnBook" class="project-card__img project-card__img--back">
+            <img loading="lazy" src="images/projects/onbook.webp" alt="Дашборд админ-панели OnBook" class="project-card__img project-card__img--front">
+          </div>
+          <a href="onbook.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">OnBook</span>
+                <a href="onbook.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Редизайн админ-панели OnBook: сократила время загрузки аудиокниги с&nbsp;часа до&nbsp;нескольких минут</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card project-card--right project-card--kalimat-app" data-animate data-delay="2">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-purple.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Kalimat</h3>
+              <p class="project-card__desc">Дизайн мобильного приложения <br>для&nbsp;изучения арабского языка</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Мобильное приложение</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/case-kalimat/mobile-library.webp" alt="Экран «Библиотека» в приложении Kalimat" class="project-card__img project-card__img--back">
+            <img loading="lazy" src="images/case-kalimat/dict-main.webp" alt="Экран словаря в приложении Kalimat" class="project-card__img project-card__img--front">
+          </div>
+          <a href="kalimat-app.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Kalimat</span>
+                <a href="kalimat-app.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна кроссплатформенного мобильного приложения для&nbsp;изучения арабского языка</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Галерея «Посмотреть ещё» -->
+  <section class="gallery">
+    <div class="gallery__inner" data-animate="scale">
+      <div class="gallery__covers">
+        <div class="gallery__photo gallery__photo--1"><img loading="lazy" src="images/gallery/card.webp" alt="Дашборд аналитики RoboGrid"></div>
+        <div class="gallery__photo gallery__photo--2"><img loading="lazy" src="images/gallery/card-1.webp" alt="Сайт Dagestan Travel: поиск жилья в Дагестане"></div>
+        <div class="gallery__photo gallery__photo--3"><img loading="lazy" src="images/gallery/card-2.webp" alt="Корзина в интерфейсе Yandex DataLens"></div>
+        <div class="gallery__photo gallery__photo--4"><img loading="lazy" src="images/gallery/ozon.webp" alt="Экраны отправки подарочной карты Ozon"></div>
+        <!-- второй проход: нужен бегущей строке на телефоне, в остальных режимах скрыт -->
+        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/card.webp" alt=""></div>
+        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/card-1.webp" alt=""></div>
+        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/card-2.webp" alt=""></div>
+        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/ozon.webp" alt=""></div>
+      </div>
+      <button type="button" class="gallery__btn">Посмотреть ещё</button>
+    </div>
+  </section>
+
+
+
+  <!-- Навыки -->
+  <section class="pd-skills" id="pd-skills">
+    <h2 class="pd-skills__title pd-anim">Навыки</h2>
+
+    <div class="pd-skills__cols">
+
+      <!-- Левая колонка — карточки въезжают слева -->
+      <div class="pd-skills__col">
+
+        <div class="pd-card pd-anim--left" data-delay="0" data-order="1">
+          <span class="pd-card__tag pd-tag--blue">Проектирование и&nbsp;UX</span>
+          <ul class="pd-card__list">
+            <li>Брифинг и&nbsp;ТЗ<span>Проведение интервью с&nbsp;клиентом, составление технического задания.</span></li>
+            <li>UX-анализ<span>Исследование рынка, проведение конкурентного анализа и&nbsp;поиск референсов.</span></li>
+            <li>Формирование гипотез<span>Формулирую UX-гипотезы на&nbsp;основе потребностей пользователя и&nbsp;проверяю их&nbsp;через прототипы.</span></li>
+            <li>Прототипирование<span>Низко- и&nbsp;высокоуровневые прототипы для&nbsp;тестирования концепций.</span></li>
+            <li>Проектирование интерфейсов<span>Создание wireframes, JTBD, user flows, сценариев взаимодействия.</span></li>
+          </ul>
+        </div>
+
+        <div class="pd-card pd-anim--left" data-delay="120" data-order="3">
+          <span class="pd-card__tag pd-tag--yellow">Рабочий процесс</span>
+          <ul class="pd-card__list">
+            <li>Взаимодействие с&nbsp;менеджерами и&nbsp;разработчиками<span>Выстраиваю прозрачную коммуникацию и&nbsp;согласую решения на&nbsp;каждом этапе.</span></li>
+            <li>Передача макетов<span>Готовлю макеты для&nbsp;удобной работы разработчиков: логичная структура, пояснения, поддержка на&nbsp;этапе вёрстки.</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Правая колонка — карточки въезжают справа -->
+      <div class="pd-skills__col">
+
+        <div class="pd-card pd-anim--right" data-delay="0" data-order="2">
+          <span class="pd-card__tag pd-tag--indigo">UI и&nbsp;дизайн-система</span>
+          <ul class="pd-card__list">
+            <li>Уверенное владение Figma<span>Использование auto layout, компонентов, вариантов, переменных, constraints.</span></li>
+            <li>Разработка UI-kit<span>Создание библиотеки компонентов, состояний, цветовых и&nbsp;текстовых стилей.</span></li>
+            <li>Опыт работы с&nbsp;дизайн-системами<span>Использование существующих систем: понимание правил, адаптация под&nbsp;задачи.</span></li>
+            <li>Создание дизайн-системы с&nbsp;нуля<span>Компоненты, токены, переменные.</span></li>
+            <li>Адаптивный дизайн<span>Разработка интерфейсов для&nbsp;разных экранов: desktop, tablet, mobile.</span></li>
+          </ul>
+        </div>
+
+        <div class="pd-card pd-anim--right" data-delay="120" data-order="4">
+          <span class="pd-card__tag pd-tag--green">Инструменты</span>
+          <div class="pd-card__tools">
+            <span class="pd-tool">Figma</span>
+            <span class="pd-tool">Photoshop</span>
+            <span class="pd-tool">Miro</span>
+            <span class="pd-tool">Tilda</span>
+            <span class="pd-tool">Framer</span>
+            <span class="pd-tool">Jitter</span>
+            <span class="pd-tool">Amplitude</span>
+            <span class="pd-tool">Яндекс&nbsp;Метрика</span>
+            <span class="pd-tool">ChatGPT</span>
+            <span class="pd-tool">Claude Code</span>
+            <span class="pd-tool">Midjourney</span>
+            <span class="pd-tool">Lovable</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Контакты -->
+  <section class="contacts" id="contacts">
+    <div class="contacts__inner">
+      <!-- вся карточка — ссылка на Telegram: раньше нажимался только текст «Кликни сюда» -->
+      <a href="https://t.me/pati_iman" target="_blank" rel="noopener" class="contacts__card" data-animate>
+        <div class="contacts__card-text">
+          <h2 class="contacts__heading">Заинтересовал мой опыт?</h2>
+          <p class="contacts__subtext">Буду рада пообщаться и&nbsp;ответить<br>на&nbsp;все интересующие вопросы!</p>
+        </div>
+        <span class="contacts__cta">Кликни сюда</span>
+      </a>
+      <div class="contacts__links" data-animate data-delay="1">
+        <a href="mailto:imi.patimat@gmail.com" class="btn btn--icon">Email <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+        <a href="https://www.behance.net/pati_designer" target="_blank" rel="noopener" class="btn btn--icon">Behance <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+        <a href="https://dprofile.ru/pati_iman" target="_blank" rel="noopener" class="btn btn--icon">Dprofile <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+        <a href="https://setka.ru/users/019d2b02-72eb-73b0-8b9d-eee7eaf6be83" target="_blank" rel="noopener" class="btn btn--icon">Сетка <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

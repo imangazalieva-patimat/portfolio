@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnBook — админ-панель для аудиокниг | Pati Designer</title>
+  <meta name="description" content="Кейс продуктового дизайнера: редизайн админ-панели для библиотеки аудиокниг. UX-аудит, сценарии, UI-kit.">
+
+  <!-- Превью при отправке ссылки. Адрес сайта и картинку добавим вместе с доменом -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pati Designer">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="OnBook — админ-панель для аудиокниг | Pati Designer">
+  <meta property="og:description" content="Кейс продуктового дизайнера: редизайн админ-панели для библиотеки аудиокниг. UX-аудит, сценарии, UI-kit.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OnBook — админ-панель для аудиокниг | Pati Designer">
+  <meta name="twitter:description" content="Кейс продуктового дизайнера: редизайн админ-панели для библиотеки аудиокниг. UX-аудит, сценарии, UI-kit.">
+
+  <!-- Иконка сайта -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Шрифты -->
+  <link rel="preload" href="fonts/montserrat/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/montserrat/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <!-- Стили сайта -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Стили кейсов: общая система + раскладка этой страницы -->
+  <link rel="stylesheet" href="css/case.css">
+  <link rel="stylesheet" href="css/case-onbook.css">
+
+</head>
+<body>
+
+  <!-- Кастомный курсор-стрелка -->
+  <div id="pd-cursor" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 28 32" fill="none">
+      <path d="M3 0 L0 24 L8 17.5 L11.5 16 L20 16 Z"
+            fill="#B3A1D1" stroke="white" stroke-width="2"
+            stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Боковая навигация по кейсу -->
+  <nav class="case-side-nav" aria-label="Навигация по кейсу">
+    <ul class="case-side-nav__list">
+      <li class="case-side-nav__item"><a href="#case-audience">аудитория</a></li>
+      <li class="case-side-nav__item"><a href="#case-team">команда и&nbsp;моя роль</a></li>
+      <li class="case-side-nav__item"><a href="#case-problem">проблема</a></li>
+      <li class="case-side-nav__item"><a href="#case-goal">цель</a></li>
+      <li class="case-side-nav__item"><a href="#case-research">подход</a></li>
+      <li class="case-side-nav__item"><a href="#case-navigation">решения</a></li>
+      <li class="case-side-nav__item"><a href="#case-results">результаты</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- Шапка — как на главной, ссылки ведут обратно на портфолио -->
+  <header class="pd-nav" id="header">
+    <div class="pd-nav__inner">
+      <a href="index.html" class="pd-nav__logo">Pati Designer</a>
+      <nav>
+        <ul class="pd-nav__menu">
+          <li><a href="index.html#about"     class="pd-nav__link">Обо мне</a></li>
+          <li><a href="index.html#portfolio" class="pd-nav__link">Портфолио</a></li>
+          <li><a href="index.html#contacts"  class="pd-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#contacts" class="pd-nav__cta btn btn--dark">Написать мне</a>
+      <button class="pd-nav__burger" id="pd-nav__burger"
+              aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Меню на телефоне -->
+  <div class="pd-nav-drawer" id="pd-nav-drawer" aria-hidden="true">
+    <nav class="pd-nav-drawer__nav">
+      <ul class="pd-nav-drawer__menu">
+        <li><a href="index.html#about"     class="pd-nav-drawer__link">Обо мне</a></li>
+        <li><a href="index.html#portfolio" class="pd-nav-drawer__link">Портфолио</a></li>
+        <li><a href="index.html#contacts"  class="pd-nav-drawer__link">Контакты</a></li>
+      </ul>
+      <a href="https://t.me/pati_iman" target="_blank" rel="noopener" class="pd-nav-drawer__cta btn btn--dark">Написать мне</a>
+    </nav>
+  </div>
+
+  <main class="case">
+
+    <!-- ===== Первый экран — обложка OnBook ===== -->
+    <section class="ob ob-cover ob-scaled" id="case-hero" data-nav-hide>
+      <div class="ob-cover__head">
+        <div class="ob-cover__intro" data-reveal="up" data-reveal-dur="2">
+          <h1 class="case-hero__title">OnBook</h1>
+          <div class="case-hero__lead">
+            <p>Разработка дизайна <span class="nowrap">админ-панели</span> для&nbsp;библиотеки аудиокниг</p>
+          </div>
+        </div>
+        <a class="case-btn case-hero__btn"
+           href="https://www.behance.net/gallery/206151579/Bookmate-Dashboard-UIUX-Design"
+           target="_blank" rel="noopener"
+           data-reveal="up" data-reveal-dur="0.2" data-reveal-delay="1.5">Открыть Behance</a>
+      </div>
+
+      <div class="ob-cover__stage">
+        <div class="ob-pic" style="--y:183; --x:414; --w:402;" data-reveal="from-left">
+          <img src="images/case-onbook/cover-empty-state.webp" alt="Пустое состояние раздела">
+        </div>
+        <div class="ob-pic" style="--y:272; --x:339; --w:563;" data-reveal="from-left">
+          <img src="images/case-onbook/cover-books.webp" alt="Список книг">
+        </div>
+        <div class="ob-pic ob-pic--lead" style="--y:84; --x:554; --w:646;" data-reveal="from-left">
+          <img src="images/case-onbook/cover-dashboard.webp" alt="Главный экран дашборда">
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== Вводный текст ===== -->
+    <section class="case-section case-section--center" id="case-intro">
+      <div class="case-section__inner">
+        <p class="case-text">
+          OnBook&nbsp;— сервис для&nbsp;прослушивания и&nbsp;скачивания аудиокниг в&nbsp;разных жанрах.
+        </p>
+        <p class="case-text">
+          Для&nbsp;внутренней команды&nbsp;— система, через которую контент-менеджеры загружают,
+          редактируют и&nbsp;поддерживают библиотеку.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Аудитория ===== -->
+    <section class="case-section" id="case-audience">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Аудитория</h2>
+        <p class="case-text">Основные пользователи админ-панели&nbsp;— контент-менеджеры, которые загружают аудиокниги.</p>
+        <p class="case-text">Так как&nbsp;пользователи админки не&nbsp;всегда технически подкованные, интерфейс должен был быть максимально простым, понятным и&nbsp;предсказуемым. Важно было снизить количество лишних действий и&nbsp;сделать так, чтобы человек мог быстро выполнить задачу без&nbsp;долгого обучения.</p>
+      </div>
+    </section>
+
+    <!-- ===== Команда и моя роль ===== -->
+    <section class="case-section" id="case-team">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Команда и&nbsp;моя роль</h2>
+        <p class="case-text">Над&nbsp;проектом работали владелец продукта, разработчики и&nbsp;я&nbsp;как&nbsp;единственный дизайнер.</p>
+        <p class="case-text">Я&nbsp;отвечала за&nbsp;полный цикл дизайна: провела UX-аудит старой админки, выделила ключевые проблемы, спроектировала новые пользовательские сценарии, подготовила UI-kit, прототипы и&nbsp;handoff для&nbsp;разработки.</p>
+      </div>
+    </section>
+
+    <!-- ===== Проблема ===== -->
+    <section class="case-section" id="case-problem">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Проблема</h2>
+        <p class="case-text">Раньше на&nbsp;публикацию одной книги мог уходить примерно час: контент-менеджеру нужно было загружать и&nbsp;проверять аудио, выбирать автора и&nbsp;редактировать информацию через неудобные сценарии.</p>
+        <p class="case-text">При&nbsp;большом объёме контента это&nbsp;сильно замедляло работу команды. Чем дольше загружалась одна книга, тем меньше контента команда успевала публиковать.</p>
+      </div>
+    </section>
+
+    <!-- ===== Цель ===== -->
+    <section class="case-section" id="case-goal">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Цель</h2>
+        <p class="case-text">Целью было ускорить загрузку и&nbsp;редактирование аудиокниг, снизить когнитивную нагрузку на&nbsp;контент-менеджеров и&nbsp;сделать админ-панель удобной для&nbsp;ежедневной работы.</p>
+        <p class="case-text">Ограничения: сохранить существующий функционал и&nbsp;быстро собрать рабочее решение. Поэтому фокус был не&nbsp;на&nbsp;полном переосмыслении продукта, а&nbsp;на&nbsp;точечном улучшении самых болезненных сценариев.</p>
+      </div>
+    </section>
+
+    <!-- ===== Подход ===== -->
+    <section class="case-section" id="case-research">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Подход</h2>
+        <p class="case-text">Я&nbsp;начала с&nbsp;UX-аудита старой админки и&nbsp;анализа реальных рабочих сценариев.</p>
+        <p class="case-text">Дополнительно я&nbsp;учитывала обратную связь от&nbsp;команды и&nbsp;список проблем от&nbsp;владельца продукта. Так как&nbsp;я&nbsp;сама работала с&nbsp;этой панелью как&nbsp;контент-менеджер, я&nbsp;могла оценить не&nbsp;только визуальные проблемы, но&nbsp;и&nbsp;реальные точки потери времени.</p>
+      </div>
+    </section>
+
+    <!-- ===== Решение 1. Ускорение загрузки аудиокниг ===== -->
+    <section class="case-solution" id="case-navigation">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Ускорение загрузки аудиокниг</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Я&nbsp;добавила возможность массовой загрузки: контент-менеджер может загрузить группу аудиофайлов за&nbsp;раз, вместо того чтобы прикреплять каждый файл отдельно.</p>
+            <p class="case-text">Для&nbsp;контроля качества я&nbsp;предусмотрела возможность прослушать аудио прямо на&nbsp;странице книги для&nbsp;перепроверки.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-onbook/feature-book.webp" alt="Страница книги со списком аудио" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 2. Удобное редактирование книги ===== -->
+    <section class="case-solution" id="case-edit">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Удобное редактирование книги</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Я&nbsp;спроектировала страницу книги как&nbsp;рабочий центр, где можно быстро управлять основной информацией.</p>
+            <p class="case-text">Это&nbsp;сократило количество переключений и&nbsp;сделало сценарий редактирования более прямым: пользователь открывает книгу и&nbsp;сразу видит всё, что&nbsp;может изменить или&nbsp;проверить.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-onbook/feature-edit.webp" alt="Страница редактирования книги" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 3. Удобный выбор автора ===== -->
+    <section class="case-solution" id="case-author">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Удобный выбор автора</h2>
+          <div class="case-solution__body">
+            <p class="case-text">В&nbsp;старом интерфейсе появлялось большое окно с&nbsp;множеством вариантов, и&nbsp;найти нужного автора было неудобно.</p>
+            <p class="case-text">Я&nbsp;заменила этот сценарий на&nbsp;селект с&nbsp;поиском. Теперь контент-менеджер может начать вводить имя автора и&nbsp;быстро выбрать нужный вариант.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-onbook/feature-author-select.webp" alt="Селект с поиском по авторам" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 4. Быстрая навигация ===== -->
+    <section class="case-solution" id="case-sidebar">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Быстрая навигация</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Ключевые разделы теперь в&nbsp;сайдбаре: основные сущности системы всегда под&nbsp;рукой.</p>
+            <p class="case-text">Для&nbsp;страниц автора и&nbsp;издательства я&nbsp;добавила переход к&nbsp;связанным книгам. Так контент-менеджеру не&nbsp;нужно вручную искать нужные книги в&nbsp;каталоге&nbsp;— система сразу показывает релевантный список.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-onbook/feature-author.webp" alt="Страница автора со связанными книгами" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 5. Главная страница с метриками ===== -->
+    <section class="case-solution" id="case-dashboard">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Главная страница с&nbsp;метриками</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Я&nbsp;спроектировала главную страницу как&nbsp;стартовый экран с&nbsp;ключевыми показателями.</p>
+            <p class="case-text">Эти метрики помогают быстро понять, как&nbsp;развивается платформа: растёт ли аудитория, какие книги популярны, сколько контента уже опубликовано и&nbsp;как&nbsp;меняется активность пользователей.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-onbook/feature-dashboard.webp" alt="Главная страница с метриками" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Визуальный стиль и UI kit ===== -->
+    <section class="case-section" id="case-hypotheses">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Визуальный стиль и&nbsp;UI kit</h2>
+        <p class="case-text">Так как&nbsp;админ-панель используется в&nbsp;ежедневной работе, визуальный стиль должен был быть не&nbsp;декоративным, а&nbsp;функциональным. Главными принципами стали читаемость, чистая структура, понятная навигация и&nbsp;удобная работа с&nbsp;большим количеством данных.</p>
+      </div>
+    </section>
+
+    <!-- ===== Типографика и цвета ===== -->
+    <section class="ob ob-section ob-type" id="ob-type">
+      <div class="ob-section__inner" style="--h:882;">
+        <h2 class="ob-type__title" data-reveal="from-right">Типографика<br>&amp; Цвета</h2>
+        <div class="ob-pic" style="--y:50; --x:808; --w:392;" data-reveal="from-left">
+          <img src="images/case-onbook/typography.png" alt="Шрифт Montserrat: начертания" loading="lazy">
+        </div>
+        <div class="ob-pic" style="--y:382; --x:0; --w:1200;" data-reveal="up">
+          <img src="images/case-onbook/colors.webp" alt="Цветовая палитра проекта" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wireframes ===== -->
+    <section class="ob ob-section ob-wire ob-scaled" id="ob-wire" data-nav-hide>
+      <div class="ob-section__inner" style="--h:894;">
+        <div class="ob-shape" data-reveal="up"
+             style="--top:0; --w:1400; --sh:894; --r-top:100; --r-bot:100; --bg:#2ab0b7;"></div>
+        <h2 class="ob-title" style="--y:60; --x:60; --fs:50;" data-reveal="from-right">Wireframes</h2>
+        <div class="ob-marquee" style="--y:190; --start:-376;" aria-hidden="true">
+          <div class="ob-marquee__track" style="--period:1928; --speed:13.6s;">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+          </div>
+        </div>
+        <div class="ob-marquee" style="--y:520; --start:-485;" aria-hidden="true">
+          <div class="ob-marquee__track" style="--period:1928; --speed:13.6s;">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-3.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-1.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-4.webp" alt="" loading="lazy">
+            <img src="images/case-onbook/wire-2.webp" alt="" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Результаты ===== -->
+    <section class="case-section" id="case-results">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Результаты</h2>
+        <p class="case-text">Редизайн помог сократить время загрузки одной аудиокниги: раньше на&nbsp;это&nbsp;мог уходить примерно час, после переработки сценария задача стала занимать минуты.</p>
+        <p class="case-text">Контент-менеджеры могли загружать больше книг за&nbsp;меньшее время, быстрее проверять аудио и&nbsp;меньше отвлекаться на&nbsp;лишние действия в&nbsp;интерфейсе.</p>
+        <p class="case-text">Для&nbsp;бизнеса результат был в&nbsp;ускорении публикации контента: чем проще и&nbsp;быстрее команда загружает книги, тем быстрее пополняется библиотека сервиса.</p>
+      </div>
+    </section>
+
+    <!-- ===== Дашборд: горизонтальная прокрутка ===== -->
+    <section class="ob ob-scroll" id="ob-scroll" data-nav-hide>
+      <div class="ob-scroll__scroller" data-travel="2200">
+        <div class="ob-scroll__stage">
+          <div class="ob-scroll__track">
+            <div class="ob-scroll__item" style="--x:120;  --w:831;"><img src="images/case-onbook/dash-1.webp" alt="Дашборд со свёрнутым меню" loading="lazy"></div>
+            <div class="ob-scroll__item" style="--x:982;  --w:914;"><img src="images/case-onbook/dash-2.webp" alt="Карточка книги" loading="lazy"></div>
+            <div class="ob-scroll__item" style="--x:1931; --w:756;"><img src="images/case-onbook/dash-3.webp" alt="Список книг" loading="lazy"></div>
+            <div class="ob-scroll__item" style="--x:2710; --w:706;"><img src="images/case-onbook/dash-4.webp" alt="Редактирование издательства" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Метаданные проекта ===== -->
+    <section class="case-meta" id="case-meta" data-nav-hide>
+      <div class="case-meta__inner">
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Тип проекта</span>
+          <span class="case-meta__value">Админ-панель</span>
+        </div>
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Инструмент</span>
+          <span class="case-meta__value">Figma</span>
+        </div>
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Год</span>
+          <span class="case-meta__value">2024</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Другие работы ===== -->
+    <section class="case-more" id="case-more" data-nav-hide>
+      <div class="case-more__inner">
+        <div class="case-more__head">
+          <h2 class="case-more__title" data-reveal="up">Посмотри другие мои работы</h2>
+        </div>
+
+        <div class="case-more__grid">
+        <div class="project-card project-card--kalimat-app">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-purple.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Kalimat</h3>
+              <p class="project-card__desc">Дизайн мобильного приложения <br>для&nbsp;изучения арабского языка</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Мобильное приложение</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/case-kalimat/mobile-library.webp" alt="Экран «Библиотека» в приложении Kalimat" class="project-card__img project-card__img--back">
+            <img loading="lazy" src="images/case-kalimat/dict-main.webp" alt="Экран словаря в приложении Kalimat" class="project-card__img project-card__img--front">
+          </div>
+          <a href="kalimat-app.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Kalimat</span>
+                <a href="kalimat-app.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна кроссплатформенного мобильного приложения для&nbsp;изучения арабского языка</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card project-card--quran">
+          <div class="project-card__dot"><img loading="lazy" src="images/icons/dot-blue.svg" alt=""></div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Quran Reader</h3>
+              <p class="project-card__desc">Дизайн <span class="nowrap">онлайн-платформы</span> для&nbsp;чтения и&nbsp;прослушивания Корана</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Веб-сайт</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/projects/quran-reader.webp" alt="Интерфейс Quran Reader: поиск по Корану и список сур" class="project-card__img">
+          </div>
+          <a href="quran-reader.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Quran Reader</span>
+                <a href="quran-reader.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна интерфейса для&nbsp;чтения, глубокого изучения и&nbsp;эффективного запоминания Корана</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        <a class="case-btn case-btn--solid case-more__cta"
+           href="index.html#portfolio" data-reveal="up">Открыть портфолио</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Прелоадер, бургер-меню, курсор главной -->
+  <script src="js/main.js"></script>
+  <!-- Логика кейса -->
+  <script src="js/case.js"></script>
+
+</body>
+</html>

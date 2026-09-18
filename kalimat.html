@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalimat — образовательная платформа | Pati Designer</title>
+  <meta name="description" content="Кейс продуктового дизайнера: личный кабинет образовательной платформы для изучения арабского. UX-исследование, продуктовая логика, интерфейсы и дизайн-система.">
+
+  <!-- Превью при отправке ссылки. Адрес сайта и картинку добавим вместе с доменом -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pati Designer">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Kalimat — образовательная платформа | Pati Designer">
+  <meta property="og:description" content="Кейс продуктового дизайнера: личный кабинет образовательной платформы для изучения арабского. UX-исследование, продуктовая логика, интерфейсы и дизайн-система.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kalimat — образовательная платформа | Pati Designer">
+  <meta name="twitter:description" content="Кейс продуктового дизайнера: личный кабинет образовательной платформы для изучения арабского. UX-исследование, продуктовая логика, интерфейсы и дизайн-система.">
+
+  <!-- Иконка сайта -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Шрифты -->
+  <link rel="preload" href="fonts/montserrat/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/montserrat/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <!-- Стили сайта -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Стили кейсов: общая система + раскладка этой страницы -->
+  <link rel="stylesheet" href="css/case.css">
+  <link rel="stylesheet" href="css/case-kalimat.css">
+</head>
+<body>
+
+  <!-- Кастомный курсор-стрелка -->
+  <div id="pd-cursor" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 28 32" fill="none">
+      <path d="M3 0 L0 24 L8 17.5 L11.5 16 L20 16 Z"
+            fill="#B3A1D1" stroke="white" stroke-width="2"
+            stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Боковая навигация по кейсу -->
+  <nav class="case-side-nav" aria-label="Навигация по кейсу">
+    <ul class="case-side-nav__list">
+      <!-- Веб-кейс -->
+      <li class="case-side-nav__item"><a href="#case-audience">аудитория</a></li>
+      <li class="case-side-nav__item"><a href="#case-team">моя роль</a></li>
+      <li class="case-side-nav__item"><a href="#case-problem">проблема</a></li>
+      <li class="case-side-nav__item"><a href="#case-goal">задача</a></li>
+      <li class="case-side-nav__item"><a href="#case-hypotheses">гипотеза</a></li>
+      <li class="case-side-nav__item"><a href="#case-research">исследование</a></li>
+      <li class="case-side-nav__item"><a href="#case-navigation">решения</a></li>
+      <li class="case-side-nav__item"><a href="#case-results">результат</a></li>
+      <li class="case-side-nav__item"><a href="#case-metrics">метрики</a></li>
+    </ul>
+  </nav>
+
+  <!-- Шапка — как на главной, ссылки ведут обратно на портфолио -->
+  <header class="pd-nav" id="header">
+    <div class="pd-nav__inner">
+      <a href="index.html" class="pd-nav__logo">Pati Designer</a>
+      <nav>
+        <ul class="pd-nav__menu">
+          <li><a href="index.html#about"     class="pd-nav__link">Обо мне</a></li>
+          <li><a href="index.html#portfolio" class="pd-nav__link">Портфолио</a></li>
+          <li><a href="index.html#contacts"  class="pd-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#contacts" class="pd-nav__cta btn btn--dark">Написать мне</a>
+      <button class="pd-nav__burger" id="pd-nav__burger"
+              aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Меню на телефоне -->
+  <div class="pd-nav-drawer" id="pd-nav-drawer" aria-hidden="true">
+    <nav class="pd-nav-drawer__nav">
+      <ul class="pd-nav-drawer__menu">
+        <li><a href="index.html#about"     class="pd-nav-drawer__link">Обо мне</a></li>
+        <li><a href="index.html#portfolio" class="pd-nav-drawer__link">Портфолио</a></li>
+        <li><a href="index.html#contacts"  class="pd-nav-drawer__link">Контакты</a></li>
+      </ul>
+      <a href="https://t.me/pati_iman" target="_blank" rel="noopener" class="pd-nav-drawer__cta btn btn--dark">Написать мне</a>
+    </nav>
+  </div>
+
+  <main class="case">
+
+    <!-- ===== Первый экран ===== -->
+    <section class="case-hero" id="case-hero" data-nav-hide>
+      <div class="case-hero__inner">
+        <div class="case-hero__head">
+          <div class="case-switch" role="group" aria-label="Платформа"
+               data-reveal="up" data-reveal-dur="0.2" data-reveal-delay="1.2">
+            <a class="case-switch__link is-active" href="kalimat.html" aria-current="page">Веб-сайт</a>
+            <a class="case-switch__link" href="kalimat-app.html">Приложение</a>
+          </div>
+
+          <div class="case-hero__intro" data-reveal="up" data-reveal-dur="2">
+            <h1 class="case-hero__title">Kalimat</h1>
+            <div class="case-hero__lead">
+              <p>Разработка дизайна образовательной платформы <br>для&nbsp;изучения арабского языка</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-hero__gallery">
+          <div class="case-hero__gallery-row">
+            <div class="case-hero__screen case-hero__screen--side case-hero__screen--left"
+                 data-reveal="fan-left" data-reveal-dur="0.75" data-reveal-delay="0.4">
+              <img src="images/case-kalimat/hero-skills.webp" width="2658" height="1840" alt="Экран «Мои навыки» с прогрессом">
+            </div>
+            <div class="case-hero__screen case-hero__screen--main"
+                 data-reveal="up" data-reveal-dur="0.75">
+              <img src="images/case-kalimat/hero-main.webp" width="2040" height="1418" alt="Главный экран с программой обучения">
+            </div>
+            <div class="case-hero__screen case-hero__screen--side case-hero__screen--right"
+                 data-reveal="fan-right" data-reveal-dur="0.75" data-reveal-delay="0.4">
+              <img src="images/case-kalimat/hero-course.webp" width="2040" height="1414" alt="Страница курса с привязкой к скиллам">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Вводный текст — веб ===== -->
+    <section class="case-section case-section--center" id="case-intro">
+      <div class="case-section__inner">
+        <p class="case-text">
+          До&nbsp;редизайна у&nbsp;Kalimat уже работали курсы, библиотека и&nbsp;словарь.<br>
+          Пользователь мог учиться, читать и&nbsp;изучать слова, однако связи между этими<br>
+          действиями не&nbsp;было. В&nbsp;итоге пользователь видел много материалов, но&nbsp;не&nbsp;понимал, в&nbsp;каком порядке их&nbsp;проходить.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Аудитория ===== -->
+    <section class="case-section" id="case-audience">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Аудитория</h2>
+        <p class="case-text">Русскоязычные пользователи, изучающие арабский язык: начинающие студенты, продолжающие ученики, а&nbsp;также те, кто хочет читать и&nbsp;понимать религиозные тексты глубже.</p>
+      </div>
+    </section>
+
+    <!-- ===== Команда и моя роль ===== -->
+    <section class="case-section" id="case-team">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Моя роль</h2>
+        <p class="case-text">В&nbsp;команде были основатель проекта, преподаватели, разработчики и&nbsp;я&nbsp;как&nbsp;дизайнер.</p>
+        <p class="case-text">Я&nbsp;работала над&nbsp;продуктом end-to-end: от&nbsp;UX-архитектуры и&nbsp;пользовательских сценариев до&nbsp;визуального языка, дизайн-системы и&nbsp;промо-материалов.</p>
+        <p class="case-text">Также участвовала в&nbsp;формировании продуктовой логики: как&nbsp;связать курсы, библиотеку, словарь и&nbsp;профиль в&nbsp;общий сценарий обучения.</p>
+      </div>
+    </section>
+
+    <!-- ===== Проблема ===== -->
+    <section class="case-section" id="case-problem">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Проблема</h2>
+        <p class="case-text">На&nbsp;старте эти разделы существовали как&nbsp;отдельные образовательные модули. Из-за&nbsp;этого обучение ощущалось фрагментированным: пользователь видел много материалов, но&nbsp;не&nbsp;всегда понимал, с&nbsp;чего начать, как&nbsp;двигаться дальше и&nbsp;насколько он&nbsp;продвинулся.</p>
+        <p class="case-text">Для&nbsp;продукта это&nbsp;означало риск низкого удержания: если пользователь не&nbsp;чувствует понятного маршрута и&nbsp;быстрого прогресса, он&nbsp;реже возвращается в&nbsp;приложение.</p>
+      </div>
+    </section>
+
+    <!-- ===== Цель — веб ===== -->
+    <section class="case-section" id="case-goal">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Задача</h2>
+        <p class="case-text">Передо мной стояла задача спроектировать личный кабинет не&nbsp;как&nbsp;обычный профиль пользователя, а&nbsp;как&nbsp;центр управления обучением.</p>
+        <div class="case-text">Он&nbsp;должен был отвечать на&nbsp;три главных вопроса ученика:
+          <ul class="case-list">
+            <li>где я&nbsp;сейчас;</li>
+            <li>что&nbsp;мне делать дальше;</li>
+            <li>какой прогресс я&nbsp;уже сделал.</li>
+          </ul>
+        </div>
+        <div class="case-callout">
+          <p class="case-callout__label">Продуктовая цель</p>
+          <p>Собрать курсы, книги, словарь, навыки и&nbsp;прогресс в&nbsp;единую систему, чтобы пользователь воспринимал обучение как&nbsp;последовательный путь, а&nbsp;не&nbsp;как&nbsp;набор отдельных разделов.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Гипотеза — веб ===== -->
+    <section class="case-section" id="case-hypotheses">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Гипотеза</h2>
+        <p class="case-text">Я&nbsp;сформулировала гипотезу:</p>
+        <p class="case-text"><strong>если объединить все образовательные сущности вокруг личного кабинета и&nbsp;сделать прогресс прозрачным, пользователю будет проще сохранять фокус, понимать свой путь и&nbsp;регулярно возвращаться к&nbsp;обучению.</strong></p>
+        <p class="case-text">Поэтому личный кабинет стал не&nbsp;дополнительным разделом, а&nbsp;основной точкой входа в&nbsp;обучение.</p>
+      </div>
+    </section>
+
+    <!-- ===== Исследование ===== -->
+    <section class="case-section" id="case-research">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Исследование и&nbsp;продуктовая модель</h2>
+        <p class="case-text">Я&nbsp;начала с&nbsp;анализа текущих сценариев и&nbsp;пользовательского пути внутри продукта.</p>
+        <div class="case-text">После интервью и&nbsp;анализа сценариев я&nbsp;выделила ключевые барьеры:
+          <ul class="case-list">
+            <li>пользователь не&nbsp;понимал, с&nbsp;какого материала начать;</li>
+            <li>не&nbsp;было ощущения завершенности;</li>
+            <li>прогресс был неочевидным;</li>
+            <li>сложно было вернуться к&nbsp;последнему действию;</li>
+            <li>слова, книги и&nbsp;курсы не&nbsp;воспринимались как&nbsp;части одной программы.</li>
+          </ul>
+        </div>
+        <div class="case-callout">
+          <p class="case-callout__label">Главный инсайт</p>
+          <p>Пользователю нужна не&nbsp;просто библиотека материалов, а&nbsp;система, которая показывает путь, прогресс и&nbsp;следующий шаг.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 1. Улучшенная навигация ===== -->
+    <section class="case-solution" id="case-navigation">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Один следующий шаг</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Пользователь не&nbsp;должен каждый раз заново выбирать, что&nbsp;изучать. Я&nbsp;выстроила сценарий так, чтобы после онбординга и&nbsp;определения уровня у&nbsp;ученика появлялась персональная программа обучения.</p>
+            <p class="case-text">Логика стала последовательной:</p>
+            <p class="case-text case-accent">онбординг → уровень → программа → теория → практика</p>
+            <p class="case-text">Так пользователь понимает, что&nbsp;делать сейчас и&nbsp;куда двигаться дальше.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-kalimat/scroll-1-level.webp" width="3840" height="3280" loading="lazy"
+               alt="Экран выбора уровня">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 2. Недавно прочитано ===== -->
+    <section class="case-solution" id="case-recent">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Привязка уровня к&nbsp;скиллам</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Под&nbsp;скиллом мы&nbsp;понимали отдельный блок знаний и&nbsp;навыков, который ученик должен освоить на&nbsp;конкретном уровне. Например, внутри уровня могут быть скиллы по&nbsp;грамматике, лексике, чтению, пониманию текста или&nbsp;другим учебным направлениям.</p>
+            <p class="case-text">Изначально уроки могли восприниматься как&nbsp;отдельные материалы: пользователь проходил занятие, но&nbsp;не&nbsp;всегда понимал, какую часть уровня он&nbsp;закрывает и&nbsp;как&nbsp;это&nbsp;приближает его к&nbsp;следующему этапу. Теперь каждый урок связан с&nbsp;конкретным скиллом.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-kalimat/hero-course.webp" width="2040" height="1414" loading="lazy"
+               alt="Страница курса с привязкой к скиллам">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 3. Режимы чтения ===== -->
+    <section class="case-solution" id="case-modes">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Прогресс как&nbsp;рост навыков</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Обычный прогресс по&nbsp;курсу показывает только факт прохождения материала. Для&nbsp;языкового продукта этого недостаточно.</p>
+            <p class="case-text">Я&nbsp;связала обучение с&nbsp;навыками и&nbsp;лексикой. Пользователь видит не&nbsp;только, сколько уроков прошёл, но&nbsp;и&nbsp;какие языковые компетенции развивает. Так обучение воспринимается не&nbsp;как&nbsp;просмотр контента, а&nbsp;как&nbsp;накопление знаний.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-kalimat/hero-skills.webp" width="2658" height="1840" loading="lazy"
+               alt="Экран «Мои навыки» с прогрессом">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 4. Связь между разделами ===== -->
+    <section class="case-solution" id="case-links">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Связь между разделами</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Каждый раздел должен был опираться на&nbsp;другие.</p>
+            <div class="case-text">Я&nbsp;объединила их&nbsp;в&nbsp;одну систему:
+              <ul class="case-list">
+                <li>уроки связаны с&nbsp;навыками;</li>
+                <li>книги связаны с&nbsp;уровнем и&nbsp;программой;</li>
+                <li>слова сохраняются в&nbsp;словарь прямо из&nbsp;контента;</li>
+                <li>словарь показывает лексику в&nbsp;контексте материалов, где она встречалась.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-kalimat/hero-main.webp" width="2040" height="1418" loading="lazy"
+               alt="Главный экран: курсы, книги и словарь в одной системе">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 5. Быстрый возврат к обучению ===== -->
+    <section class="case-solution" id="case-return">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Быстрый возврат к&nbsp;обучению</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Для&nbsp;регулярного обучения важно, чтобы пользователь мог быстро продолжить с&nbsp;того места, где остановился.</p>
+            <p class="case-text">В&nbsp;личном кабинете я&nbsp;предусмотрела блок последних материалов и&nbsp;дневную норму. Это&nbsp;помогает сократить путь до&nbsp;действия и&nbsp;формирует привычку возвращаться к&nbsp;обучению каждый день.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-kalimat/feature-return.webp" width="2648" height="1840" loading="lazy"
+               alt="Блок последних материалов и дневной нормы">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Решение 6. Связка лексики с прогрессом ===== -->
+    <section class="case-solution" id="case-lexis">
+      <div class="case-solution__inner">
+        <div class="case-solution__text" data-reveal="from-left">
+          <h2 class="case-h2">Связка лексики с&nbsp;прогрессом</h2>
+          <div class="case-solution__body">
+            <p class="case-text">Я&nbsp;связала новые слова с&nbsp;контекстом обучения: пользователь встречает лексику в&nbsp;уроках и&nbsp;материалах, а&nbsp;затем переносит её&nbsp;в&nbsp;словарь для&nbsp;повторения.</p>
+            <p class="case-text">Так словарь становится не&nbsp;отдельной функцией, а&nbsp;частью учебного процесса.</p>
+          </div>
+        </div>
+        <div class="case-solution__shot" data-reveal="zoom">
+          <img src="images/case-kalimat/feature-lexis-crop.webp" width="3838" height="3973" loading="lazy"
+               alt="Словарь: лексика в контексте материалов">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Результаты ===== -->
+    <section class="case-section" id="case-results">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Результат</h2>
+        <p class="case-text">В&nbsp;результате получился не&nbsp;просто интерфейс образовательной платформы, а&nbsp;связанная продуктовая система, где курсы, библиотека, словарь и&nbsp;профиль работают вместе.</p>
+        <div class="case-text">Что&nbsp;изменилось:
+          <ul class="case-list">
+            <li>появился единый центр управления обучением;</li>
+            <li>пользователь получил понятный следующий шаг;</li>
+            <li>прогресс стал прозрачным;</li>
+            <li>курсы, книги и&nbsp;словарь связались в&nbsp;одну образовательную логику продукта.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Метрики и продуктовая логика — веб ===== -->
+    <section class="case-section case-section--tight-bottom" id="case-metrics">
+      <div class="case-section__inner">
+        <h2 class="case-h2 case-section__title">Метрики и&nbsp;продуктовая логика</h2>
+        <div class="case-text">Для&nbsp;оценки решений я&nbsp;закладывала продуктовые метрики, связанные с&nbsp;вовлечением и&nbsp;регулярностью:
+          <ul class="case-list">
+            <li>Time to First Lesson&nbsp;— как&nbsp;быстро пользователь доходит до&nbsp;первого урока;</li>
+            <li>завершение урока или&nbsp;главы;</li>
+            <li>возврат к&nbsp;последним материалам;</li>
+            <li>добавление слов в&nbsp;словарь;</li>
+            <li>повторение слов;</li>
+            <li>глубина чтения;</li>
+            <li>удержание пользователя;</li>
+            <li>частота возвращения в&nbsp;обучение.</li>
+          </ul>
+        </div>
+        <p class="case-text">Эти метрики помогали смотреть на&nbsp;интерфейс не&nbsp;только с&nbsp;точки зрения удобства, но&nbsp;и&nbsp;с&nbsp;точки зрения пользы для&nbsp;продукта: помогает ли решение пользователю быстрее начать, продолжить и&nbsp;вернуться.</p>
+      </div>
+    </section>
+
+    <!-- ===== Фокус кейса — веб ===== -->
+    <section class="case-section case-section--tight-top" id="case-focus">
+      <div class="case-section__inner">
+        <div class="case-callout case-callout--lead">
+          <p>Главный фокус кейса&nbsp;— не&nbsp;в&nbsp;количестве экранов, а&nbsp;в&nbsp;том, как&nbsp;через UX-архитектуру и&nbsp;продуктовую логику я&nbsp;помогла превратить сложный образовательный контент в&nbsp;понятный пользовательский путь.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Метаданные проекта ===== -->
+    <section class="case-meta" id="case-meta" data-nav-hide>
+      <div class="case-meta__inner">
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Тип проекта</span>
+          <span class="case-meta__value">Веб-сайт</span>
+        </div>
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Инструмент</span>
+          <span class="case-meta__value">Figma</span>
+        </div>
+        <div class="case-meta__item" data-reveal="up">
+          <span class="case-meta__label">Год</span>
+          <span class="case-meta__value">2024</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Другие работы ===== -->
+    <section class="case-more" id="case-more" data-nav-hide>
+      <div class="case-more__inner">
+        <div class="case-more__head">
+          <h2 class="case-more__title" data-reveal="up">Посмотри другие мои работы</h2>
+        </div>
+
+        <div class="case-more__grid">
+        <div class="project-card project-card--quran">
+          <div class="project-card__dot">
+            <img loading="lazy" src="images/icons/dot-blue.svg" alt="">
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Quran Reader</h3>
+              <p class="project-card__desc">Дизайн <span class="nowrap">онлайн-платформы</span> для&nbsp;чтения и&nbsp;прослушивания Корана</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2C</span>
+              <span class="project-tag">Веб-сайт</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/projects/quran-reader.webp" alt="Интерфейс Quran Reader: поиск по Корану и список сур" class="project-card__img">
+          </div>
+          <a href="quran-reader.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">Quran Reader</span>
+                <a href="quran-reader.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Разработка дизайна интерфейса для&nbsp;чтения, глубокого изучения и&nbsp;эффективного запоминания Корана</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card project-card--onbook">
+          <div class="project-card__dot"><img loading="lazy" src="images/icons/dot-teal.svg" alt=""></div>
+          <div class="project-card__info">
+            <div class="project-card__header">
+              <h3 class="project-card__name">OnBook</h3>
+              <p class="project-card__desc">UI/UX дизайн админ-панели <br>для&nbsp;библиотеки аудиокниг</p>
+            </div>
+            <div class="project-card__tags">
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Дашборд</span>
+              <span class="project-tag">Админ-панель</span>
+            </div>
+          </div>
+          <div class="project-card__media">
+            <img loading="lazy" src="images/projects/onbook.webp" alt="Дашборд админ-панели OnBook" class="project-card__img project-card__img--back">
+            <img loading="lazy" src="images/projects/onbook.webp" alt="Дашборд админ-панели OnBook" class="project-card__img project-card__img--front">
+          </div>
+          <a href="onbook.html" class="project-card__btn">
+            <img loading="lazy" src="images/icons/arrow.svg" alt="открыть">
+          </a>
+          <div class="project-card__overlay">
+            <div class="project-card__overlay-inner">
+              <div class="project-card__overlay-header">
+                <span class="project-card__overlay-name">OnBook</span>
+                <a href="onbook.html" class="project-card__overlay-btn">Открыть кейс <img loading="lazy" src="images/icons/arrow.svg" alt=""></a>
+              </div>
+              <p class="project-card__overlay-desc">Редизайн админ-панели OnBook: сократила время загрузки аудиокниги с&nbsp;часа до&nbsp;нескольких минут</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        <a class="case-btn case-btn--solid case-more__cta"
+           href="index.html#portfolio" data-reveal="up">Открыть портфолио</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Прелоадер, бургер-меню, курсор главной -->
+  <script src="js/main.js"></script>
+  <!-- Логика кейса -->
+  <script src="js/case.js"></script>
+
+</body>
+</html>
