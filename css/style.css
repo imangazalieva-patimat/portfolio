@@ -263,11 +263,11 @@ body {
 .pd-nav-drawer__link {
   display: block;
   font-family: 'Montserrat', sans-serif;
-  font-size: 38px;
+  font-size: 32px;   /* было 38px — на телефоне пункты читались слишком крупно */
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;
-  letter-spacing: -1px;
+  letter-spacing: -0.8px;
   padding: 14px 0;
   opacity: 0;
   transition: opacity 0.25s ease, color 0.2s ease;

@@ -338,8 +338,11 @@
       drawer.classList.toggle('is-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-      /* Страница под открытым меню не прокручивается */
-      document.body.style.overflow = open ? 'hidden' : '';
+      /* Страница под открытым меню не прокручивается. Блокируем прокрутку
+         у всего документа, а не у body: overflow у body делал его отдельным
+         прокручиваемым блоком, и шапка (sticky) уезжала к началу страницы —
+         посреди страницы вместе с ней пропадал крестик закрытия. */
+      document.documentElement.style.overflow = open ? 'hidden' : '';
     }
 
     burger.addEventListener('click', function () {
