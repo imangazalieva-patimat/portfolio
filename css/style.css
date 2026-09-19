@@ -1602,6 +1602,9 @@ body {
   .contacts__heading { font-size: 22px; }
   .contacts__subtext { font-size: 15px; }
   .contacts__cta     { font-size: 26px; }
+  /* при нажатии текст растёт не до 52px, как на десктопе, а до 34px:
+     в узкой карточке 52px смотрелись слишком крупно */
+  .contacts__card:hover .contacts__cta { font-size: 34px; }
   .contacts__links   { gap: 8px; }
 
   /* Кнопки в футере — меньше */

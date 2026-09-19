@@ -376,10 +376,14 @@
   flex-shrink: 0;
   width: 220px;
   height: 52px;
-  /* белая с тёмной обводкой — как «Открыть Behance» на первом экране;
-     без обводки на белом фоне блока кнопку не видно */
-  background-color: #fff;
-  border-color: var(--btn-ink);
+  /* без заливки и без обводки: в покое — просто надпись,
+     при наведении под ней проявляется светло-серая плашка */
+  background-color: transparent;
+  border-color: transparent;
+}
+.case-more__cta:hover {
+  background-color: #f2f2f2;
+  color: var(--btn-ink);
 }
 /* Кнопка стоит в самом низу .case-more с overflow: hidden. Обычный сдвиг
    появления (100px) уводил её за край блока: наблюдатель не видел кнопку,
