@@ -1,0 +1,40 @@
+/* ==========================================================================
+   reset.css — сброс браузерных умолчаний. Подключается вторым, после шрифтов.
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* всё, что вылезает за правый край, обрезает окно, а не body —
+     иначе на iPhone в Safari переставала держаться шапка (sticky) */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #fcfcfc;
+  color: #1e1e1e;
+  /* clip, а не hidden: hidden делал body прокручиваемым контейнером,
+     и шапка с position: sticky на iPhone уезжала вместе со страницей.
+     clip обрезает так же, но контейнером body не становится. */
+  overflow-x: clip;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}

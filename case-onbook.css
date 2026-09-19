@@ -1,0 +1,314 @@
+/* ==========================================================================
+   Кейс «OnBook» — раскладка, уникальная для этой страницы.
+   Общие компоненты — в css/case.css, подключается перед этим файлом.
+
+   Координаты блоков заданы числами в единицах макета (сетка 1200px)
+   и умножаются на --k:
+
+   --k: 1px         — блок показывается в сетке 1200px по центру;
+   --k: 0.0833333vw — блок растягивается на ширину окна (1200 единиц = 100vw).
+   ========================================================================== */
+
+.ob {
+  --units: 1200;   /* единиц макета в ширине блока; меньше — крупнее содержимое */
+  --k: 1px;
+  --teal: #2ba4ab;
+  --dark: #3c444a;
+}
+
+/* блоки, которые тянутся на всю ширину окна */
+.ob-scaled { --k: calc(100vw / var(--units)); }
+
+/* Хэдер под цвет первого экрана */
+.pd-nav { --pd-bar: 252, 252, 252; }
+
+/* ==========================================================================
+   1. Обложка
+   ========================================================================== */
+
+.ob-cover {
+  position: relative;
+  height: calc(550 * var(--k));
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+/* Текст и кнопка: параметры те же, что на первом экране Quran Reader,
+   левый отступ совпадает с логотипом в шапке (--content-px). */
+.ob-cover__head {
+  position: absolute;
+  top: 80px;
+  left: var(--content-px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 28px;
+}
+.ob-cover__intro {
+  display: flex;
+  flex-direction: column;
+  row-gap: 28px;
+}
+/* Описание заканчивается левее главного скриншота (он стоит с 554 единиц
+   макета), иначе на 1280–1440px картинка перекрывает текст. */
+.ob-cover .case-hero__lead {
+  max-width: calc(554 * var(--k) - var(--content-px) - 40px);
+}
+
+/* ==========================================================================
+   2. Каркас блоков в сетке макета
+   ========================================================================== */
+
+.ob-section {
+  position: relative;
+  overflow: hidden;
+}
+.ob-section__inner {
+  position: relative;
+  width: calc(1200 * var(--k));
+  height: calc(var(--h) * var(--k));
+  margin: 0 auto;
+}
+
+/* Подложка шире сетки, по центру экрана.
+   Центрируем отступом, а не transform — transform нужен анимации появления. */
+.ob-shape {
+  position: absolute;
+  top: calc(var(--top, 0) * var(--k));
+  left: calc(50% - var(--w) * var(--k) / 2);
+  width: calc(var(--w) * var(--k));
+  height: calc(var(--sh) * var(--k));
+  border-radius: calc(var(--r-top, 0) * var(--k)) calc(var(--r-top, 0) * var(--k))
+                 calc(var(--r-bot, 0) * var(--k)) calc(var(--r-bot, 0) * var(--k));
+  background-color: var(--bg);
+}
+
+.ob-pic {
+  position: absolute;
+  top: calc(var(--y) * var(--k));
+  left: calc(var(--x) * var(--k));
+  width: calc(var(--w) * var(--k));
+}
+.ob-pic img { display: block; width: 100%; height: auto; }
+
+.ob-title {
+  position: absolute;
+  top: calc(var(--y) * var(--k));
+  left: calc(var(--x) * var(--k));
+  margin: 0;
+  font-size: calc(var(--fs) * var(--k));
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+}
+
+/* ==========================================================================
+   3. Типографика и цвета
+   ========================================================================== */
+
+.ob-type { background-color: #f8f8f8; }
+.ob-type__title {
+  position: absolute;
+  top: 120px;
+  left: 0;
+  margin: 0;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #0d0e16;
+}
+
+/* ==========================================================================
+   4. Wireframes — бесконечная лента
+   ========================================================================== */
+
+.ob-wire { background-color: var(--dark); }
+
+.ob-marquee {
+  position: absolute;
+  top: calc(var(--y) * var(--k));
+  left: calc(var(--start) * var(--k));
+  height: calc(300 * var(--k));
+}
+.ob-marquee__track {
+  height: 100%;
+  display: flex;
+  gap: calc(32 * var(--k));
+  /* один проезд = ширина одного паттерна, дальше бесшовный повтор.
+     Как в макете, лента трогается, когда блок появляется на экране. */
+  animation: ob-marquee var(--speed, 13.6s) linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+.ob-wire.is-running .ob-marquee__track { animation-play-state: running; }
+/* Кадры показываются целиком, в своей пропорции (от 1.37 до 1.77):
+   высота общая, ширина — по картинке. Раньше все кадры резались до 3:2,
+   и у широких экранов пропадала правая часть вместе со скруглёнными углами.
+   Период ленты — ширина одного набора из четырёх кадров плюс четыре зазора:
+   300 × (1.451 + 1.365 + 1.582 + 1.772) + 4 × 32 = 1979.15.
+   Меняешь картинки — пересчитай --period в разметке и скорость
+   (--speed = 13.6s × период / 1928, чтобы лента ехала с прежней скоростью). */
+.ob-marquee__track img {
+  display: block;
+  height: 100%;
+  width: auto;
+  flex-shrink: 0;
+  border-radius: calc(10 * var(--k));
+}
+@keyframes ob-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(var(--period) * var(--k) * -1)); }
+}
+
+/* ==========================================================================
+   5. Дашборд — горизонтальная прокрутка по скроллу
+
+   ВАЖНО: у .ob-scroll не должно быть overflow — иначе перестаёт работать
+   position:sticky у сцены и картинки не залипают.
+   Высота блока и путь прокрутки заданы отдельно, как в макете: картинки
+   едут первые 2200px, затем блок ещё «доезжает» до своих 2930px.
+   ========================================================================== */
+
+.ob-scroll { background-color: #fbfbfb; }
+.ob-scroll__scroller {
+  --shot-h: 519px;
+  height: 2930px;
+}
+.ob-scroll__stage {
+  position: sticky;
+  top: calc(50vh - var(--shot-h) / 2);
+  height: var(--shot-h);
+  overflow: hidden;
+}
+.ob-scroll__track {
+  position: relative;
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  will-change: transform;
+}
+.ob-scroll__item {
+  position: absolute;
+  top: 0;
+  left: calc(var(--x) * 1px);
+  width: calc(var(--w) * 1px);
+}
+.ob-scroll__item img { display: block; width: 100%; height: auto; }
+
+/* ==========================================================================
+   6. Адаптив
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-marquee__track { animation: none !important; }
+}
+
+@media (max-width: 1279px) {
+  .ob-scroll__scroller { height: auto; }
+  .ob-scroll__stage {
+    position: static;
+    height: auto;
+    overflow-x: auto;
+  }
+  .ob-scroll__track {
+    width: max-content;
+    height: auto;
+    display: flex;
+    gap: 24px;
+    padding: 0 24px;
+    transform: none !important;
+  }
+  .ob-scroll__item {
+    position: static;
+    flex-shrink: 0;
+    width: calc(var(--w) * 1px);
+  }
+}
+
+/* ==========================================================================
+   7. Адаптив
+
+   Правило блока: текст никогда не живёт в координатах --k — только картинки
+   и подложки. Ниже 1280px артборды переходят в поток.
+   ========================================================================== */
+
+@media (max-width: 1279px) {
+
+  /* --- Обложка: текст сверху, под ним один главный скриншот --- */
+  .ob-cover {
+    height: auto;
+    padding: 96px 0 0;
+  }
+  .ob-cover .case-hero__lead { max-width: none; }
+  .ob-cover__head {
+    position: static;
+    padding: 0 var(--case-gutter);
+    max-width: 720px;
+  }
+  .ob-cover__stage {
+    position: relative;
+    margin-top: 48px;
+    padding: 0 var(--case-gutter);
+  }
+  /* из трёх скриншотов на узком экране показываем только главный */
+  .ob-cover__stage .ob-pic { display: none; }
+  .ob-cover__stage .ob-pic--lead {
+    display: block;
+    position: static;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* --- Типографика и цвета: артборд 1200px → поток --- */
+  .ob-type .ob-section__inner {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 80px var(--case-gutter);
+  }
+  .ob-type__title {
+    position: static;
+    font-size: clamp(34px, 4.6vw, 60px);
+  }
+  .ob-type .ob-pic {
+    position: static;
+    width: 100%;
+  }
+  .ob-type .ob-pic:first-of-type { max-width: 392px; }
+}
+
+@media (max-width: 1023px) {
+  /* --- Дашборд: свайп со снапом, следующий кадр выглядывает --- */
+  .ob-scroll__stage {
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ob-scroll__track { gap: 16px; padding: 0 var(--case-gutter); }
+  .ob-scroll__item {
+    width: min(calc(var(--w) * 1px), 82vw);
+    scroll-snap-align: center;
+  }
+
+  /* лента вайрфреймов крупнее, чтобы экраны читались */
+  .ob-wire { --units: 900; }
+}
+
+@media (max-width: 639px) {
+  /* Дашборд на телефоне виден и листается пальцем — правила свайпа
+     со снапом заданы выше, в блоке до 1023px.
+     Вайрфреймы: лента укрупнена, на экран влезает 600 единиц
+     макета, поэтому экраны читаются (на 390px картинка ~195px высотой).
+     Потолок 0.71px — масштаб планшета на 640px (640 / 900): без него
+     на 639px лента была крупнее, чем на планшете, и на границе прыгала. */
+  .ob-wire { --k: min(calc(100vw / 600), 0.71px); }
+
+  /* отступ сверху обложки — как на главной: 52px от шапки (было 96px) */
+  .ob-cover { padding-top: 52px; }
+
+  /* лента дашбордов после «Результатов» на телефоне скрыта — по решению Пати */
+  .ob-scroll { display: none; }
+}
