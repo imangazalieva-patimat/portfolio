@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Кейс «Quran Reader» — раскладка, уникальная для этой страницы.
+   Общие компоненты — в css/case.css, подключается перед этим файлом.
+   ========================================================================== */
+
+/* Хэдер под цвет первого экрана */
+.pd-nav { --pd-bar: 239, 240, 247; }
+
+/* ==========================================================================
+   Скриншоты решений — в рамке цвета кейса
+   ========================================================================== */
+
+.case-solution__shot {
+  border: 4px solid var(--shot-border);
+}
+
+/* ==========================================================================
+   Лента закладок — продолжение блока «Персональные закладки»:
+   страница прокручивается вниз, а ряд скринов едет влево до последнего.
+   Путь и высоту считает case.js по ширине ряда (data-travel="auto").
+   ВАЖНО: у предков сцены не должно быть overflow — иначе sticky отключится.
+   ========================================================================== */
+
+.case-gallery {
+  background-color: var(--bg-feature);   /* как у блока закладок над лентой */
+  padding: 0 0 100px;
+}
+/* ширина не задана: с width: 100% поля прибавлялись к ширине экрана,
+   и на телефоне страница становилась шире окна */
+.case-gallery__intro {
+  max-width: 1000px;
+  margin: 0 auto 56px;
+  padding: 0 var(--case-gutter);
+  box-sizing: content-box;
+}
+.case-gallery__stage {
+  --shot-h: 520px;
+  position: sticky;
+  top: calc(50vh - var(--shot-h) / 2);
+  height: var(--shot-h);
+  overflow: hidden;
+}
+.case-gallery__track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  height: 100%;
+  /* первый скрин стоит по левому краю текста (колонка 1000px) */
+  padding: 0 max(var(--case-gutter), calc((100vw - 1000px) / 2));
+  will-change: transform;
+}
+.case-gallery__track img {
+  display: block;
+  flex: 0 0 auto;
+  width: 725px;                      /* 1814 × 1300 → 725 × 520 */
+  height: auto;
+  box-sizing: border-box;
+  border: 4px solid var(--shot-border);
+  border-radius: var(--shot-radius);
+}
+
+/* ниже 1280 — без залипания: ряд листается жестом */
+@media (max-width: 1279px) {
+  .case-gallery__stage {
+    position: static;
+    height: auto;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+  .case-gallery__track {
+    height: auto;
+    gap: 20px;
+    padding: 0 var(--case-gutter) 12px;
+    transform: none !important;
+  }
+  .case-gallery__track img {
+    width: clamp(280px, 72vw, 640px);
+    scroll-snap-align: center;
+  }
+}
+
+@media (max-width: 639px) {
+  .case-gallery { padding-bottom: 70px; }
+  .case-gallery__intro { margin-bottom: 36px; }
+  .case-gallery__intro br { display: none; }   /* строки по ширине экрана */
+}
