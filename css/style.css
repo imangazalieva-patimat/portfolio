@@ -13,7 +13,6 @@
      9.  Контакты
      10. Появление блоков и курсор-след
      11. Адаптив: планшет и узкие экраны, затем телефон
-     12. Плашка о cookies
 
    Правила:
      — размеры и цвета берём из переменных :root, не хардкодим;
@@ -1645,81 +1644,4 @@ body {
     .gallery__inner { width: min(680px, 92vw); height: auto; aspect-ratio: 680 / 597; }
     .gallery__photo { padding: 12px; border-radius: 32px; --ph: 400px; }
     .gallery__covers { transform: scale(calc(0.8 * min(680px, 92vw) / 680px)); }
-}
-
-
-/* ===== ПЛАШКА О COOKIES =====
-   Плашка о cookies: светлая карточка по центру снизу. Создаётся в js/main.js,
-   после «Хорошо» больше не показывается. */
-.pd-cookie {
-  position: fixed;
-  left: 0;
-  right: 0;
-  margin-inline: auto;            /* центр без translate(-50%) — текст рисуется чётче */
-  bottom: 32px;
-  z-index: 95;                       /* над контентом, под мобильным меню и прелоадером */
-  width: max-content;
-  max-width: calc(100% - 40px);   /* по ширине текста, но не шире экрана */
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 12px 12px 12px 28px;
-  background: #fff;
-  border-radius: 100px;
-  box-shadow: 0 12px 40px rgba(30, 30, 30, 0.14);
-  font-family: 'Montserrat', sans-serif;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .5s cubic-bezier(.19,1,.22,1), transform .6s cubic-bezier(.19,1,.22,1);
-  pointer-events: none;
-}
-.pd-cookie.is-in  { opacity: 1; transform: none; pointer-events: auto; }
-.pd-cookie.is-out { opacity: 0; transform: translateY(24px); pointer-events: none; }
-.pd-cookie__text {
-  flex: 1;
-  font-size: 15px;
-  line-height: 1.45;
-  color: var(--text-secondary);
-}
-.pd-cookie__link {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--contact-bg);
-}
-.pd-cookie__ok {
-  flex-shrink: 0;
-  padding: 13px 26px;
-  border: 0;
-  border-radius: 100px;
-  background: var(--btn-accent);
-  color: var(--btn-text);
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: transform .25s ease;
-}
-.pd-cookie__ok:focus-visible,
-.pd-cookie__link:focus-visible { outline: 3px solid var(--contact-bg); outline-offset: 3px; }
-@media (hover: hover) {
-  .pd-cookie__ok:hover { transform: translateY(-2px); }
-  .pd-cookie__link:hover { text-decoration-color: currentColor; }
-}
-@media (max-width: 639px) {
-  .pd-cookie {
-    bottom: max(16px, env(safe-area-inset-bottom));
-    width: calc(100% - 32px);
-    max-width: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-    padding: 20px;
-    border-radius: 24px;
-  }
-  .pd-cookie__ok { width: 100%; padding: 14px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pd-cookie { transition: opacity .2s ease; transform: none; }
-  .pd-cookie.is-out { transform: none; }
 }

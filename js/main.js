@@ -19,7 +19,6 @@
      11. Переход по якорю с другой страницы
      12. Карточка проекта кликабельна целиком
      13. Курсор-след
-     14. Плашка о cookies
    ========================================================================== */
 
 (function () {
@@ -74,8 +73,7 @@
      2. Прелоадер — рисуется росчерк, затем экран уходит вверх
 
      Тайминги связаны со стилями блока PRELOADER в css/style.css.
-     Когда экран ушёл, страница получает событие preloader:done — его ждут
-     плашка о cookies и переход по якорю.
+     Когда экран ушёл, страница получает событие preloader:done.
      ======================================================================== */
 
   function initPreloader() {
@@ -562,65 +560,6 @@
   }
 
   /* ========================================================================
-     14. Плашка о cookies
-
-     Появляется после прелоадера (на главной) или через секунду (на
-     остальных страницах). После «Хорошо» выбор запоминается в браузере.
-     Стили — блок COOKIE NOTICE в css/style.css.
-     ======================================================================== */
-
-  function initCookieNotice() {
-    var KEY = 'pd-cookie-ok';
-    var AFTER_PRELOADER = 800;   /* пауза после ухода прелоадера */
-    var AFTER_LOAD = 1000;       /* пауза на страницах без прелоадера */
-    var FALLBACK = 6000;         /* страховка, если событие не придёт */
-    var HIDE_TIME = 600;         /* длительность ухода, как в CSS */
-
-    /* В приватном режиме обращение к localStorage может бросить ошибку */
-    try {
-      if (localStorage.getItem(KEY) === '1') return;
-    } catch (e) { /* хранилище недоступно — покажем плашку как обычно */ }
-
-    var box = document.createElement('div');
-    box.className = 'pd-cookie';
-    box.setAttribute('role', 'region');
-    box.setAttribute('aria-label', 'Уведомление о cookies');
-    box.innerHTML =
-      '<p class="pd-cookie__text">Сайт использует cookies для анализа посещаемости. ' +
-      '<a class="pd-cookie__link" href="privacy.html">Подробнее</a></p>' +
-      '<button type="button" class="pd-cookie__ok">Хорошо</button>';
-
-    var shown = false;
-    function show() {
-      if (shown) return;
-      shown = true;
-      document.body.appendChild(box);
-      void box.offsetWidth;   /* пересчёт, иначе переход появления не сработает */
-      box.classList.add('is-in');
-    }
-
-    box.querySelector('.pd-cookie__ok').addEventListener('click', function () {
-      try {
-        localStorage.setItem(KEY, '1');
-      } catch (e) { /* не запомнилось — плашка появится в следующий раз */ }
-      box.classList.remove('is-in');
-      box.classList.add('is-out');
-      setTimeout(function () {
-        if (box.parentNode) box.parentNode.removeChild(box);
-      }, HIDE_TIME);
-    });
-
-    if (document.getElementById('preloader')) {
-      document.addEventListener('preloader:done', function () {
-        setTimeout(show, AFTER_PRELOADER);
-      }, { once: true });
-      setTimeout(show, FALLBACK);
-    } else {
-      setTimeout(show, AFTER_LOAD);
-    }
-  }
-
-  /* ========================================================================
      Запуск
      ======================================================================== */
 
@@ -638,6 +577,5 @@
     initAboutDrop();
     initSkillsReveal();
     initSkillsTabs();
-    initCookieNotice();
   });
 })();
