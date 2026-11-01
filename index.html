@@ -319,22 +319,57 @@
   </section>
 
   <!-- Галерея «Посмотреть ещё» -->
-  <section class="gallery">
-    <div class="gallery__inner" data-animate="scale">
-      <div class="gallery__covers">
-        <div class="gallery__photo gallery__photo--1"><img loading="lazy" src="images/gallery/card.webp" alt="Дашборд аналитики RoboGrid"></div>
-        <div class="gallery__photo gallery__photo--2"><img loading="lazy" src="images/gallery/card-1.webp" alt="Сайт Dagestan Travel: поиск жилья в Дагестане"></div>
-        <div class="gallery__photo gallery__photo--3"><img loading="lazy" src="images/gallery/card-2.webp" alt="Корзина в интерфейсе Yandex DataLens"></div>
-        <div class="gallery__photo gallery__photo--4"><img loading="lazy" src="images/gallery/ozon.webp" alt="Экраны отправки подарочной карты Ozon"></div>
-        <!-- второй проход: нужен бегущей строке на телефоне, в остальных режимах скрыт -->
-        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/card.webp" alt=""></div>
-        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/card-1.webp" alt=""></div>
-        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/card-2.webp" alt=""></div>
-        <div class="gallery__photo gallery__photo--dup" aria-hidden="true"><img loading="lazy" src="images/gallery/ozon.webp" alt=""></div>
+<section class="gallery" id="concepts" aria-label="Концепты интерфейсов">
+  <div class="gallery__inner">
+    <div class="gallery__covers" id="gallery-covers">
+
+      <div class="gallery__photo gallery__photo--1">
+        <img src="images/gallery/tempo-watch.webp"
+             alt="TEMPO: задачи на Apple Watch" loading="lazy">
       </div>
-      <button type="button" class="gallery__btn">Посмотреть ещё</button>
+
+      <div class="gallery__photo gallery__photo--2">
+        <img src="images/gallery/rail-booking.webp"
+             alt="Rail: бронирование билетов на поезд" loading="lazy">
+      </div>
+
+      <div class="gallery__photo gallery__photo--3">
+        <img src="images/gallery/medication-reminder.webp"
+             alt="Напоминание о приёме лекарств" loading="lazy">
+      </div>
+
+      <div class="gallery__photo gallery__photo--4">
+        <img src="images/gallery/medication-history.webp"
+             alt="История приёма лекарств" loading="lazy">
+      </div>
+
+      <div class="gallery__photo">
+        <img src="images/gallery/card-1.webp"
+             alt="Dagestan Travel: поиск жилья" loading="lazy">
+      </div>
+
+      <div class="gallery__photo">
+        <img src="images/gallery/card-2.webp"
+             alt="Корзина в интерфейсе Yandex DataLens" loading="lazy">
+      </div>
+
+      <div class="gallery__photo">
+        <img src="images/gallery/ozon.webp"
+             alt="Подарочные карты Ozon" loading="lazy">
+      </div>
+
     </div>
-  </section>
+
+    <button type="button"
+            class="gallery__btn"
+            aria-expanded="false"
+            aria-controls="gallery-covers">
+      Посмотреть ещё
+    </button>
+  </div>
+</section>
+
+
 
 
 
@@ -419,6 +454,7 @@
       </a>
       <div class="contacts__links" data-animate data-delay="1">
         <a href="mailto:imi.patimat@gmail.com" class="btn btn--icon">Email <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
+        <a href="https://dribbble.com/pati_iman" target="_blank" rel="noopener" class="btn btn--icon">Dribbble <img src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
         <a href="https://www.behance.net/pati_designer" target="_blank" rel="noopener" class="btn btn--icon">Behance <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
         <a href="https://dprofile.ru/pati_iman" target="_blank" rel="noopener" class="btn btn--icon">Dprofile <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>
         <a href="https://setka.ru/users/019d2b02-72eb-73b0-8b9d-eee7eaf6be83" target="_blank" rel="noopener" class="btn btn--icon">Сетка <img loading="lazy" src="images/icons/arrow-dark.svg" alt="" class="btn__icon"></a>

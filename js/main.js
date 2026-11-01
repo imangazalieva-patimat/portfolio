@@ -393,28 +393,82 @@
   function initGallery() {
     var inner = document.querySelector('.gallery__inner');
     var btn = inner && inner.querySelector('.gallery__btn');
-    if (!btn) return;
+    var covers = inner && inner.querySelector('.gallery__covers');
 
-    function setOpen(open) {
-      inner.classList.toggle('is-open', open);
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
+    if (!btn || !covers || inner.dataset.galleryReady) return;
+    inner.dataset.galleryReady = 'true';
 
-    setOpen(false);
+    var cards = Array.from(covers.children);
+    var reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
 
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      setOpen(true);
+    /* В присланном HTML копий нет — создаём их один раз для ленты */
+    cards.forEach(function (card) {
+      var copy = card.cloneNode(true);
+      copy.classList.add('gallery__photo--dup');
+      copy.setAttribute('aria-hidden', 'true');
+      copy.querySelector('img').alt = '';
+      covers.appendChild(copy);
     });
 
-    inner.addEventListener('click', function (e) {
-      if (!inner.classList.contains('is-open')) return;
-      if (e.target.closest('.gallery__btn')) return;
-      setOpen(false);
-    });
+    btn.addEventListener('click', function () {
+      if (inner.classList.contains('is-open')) return;
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setOpen(false);
+      var before = cards.map(function (card) {
+        return card.getBoundingClientRect();
+      });
+
+      covers.querySelectorAll('img').forEach(function (img) {
+        img.loading = 'eager';
+      });
+
+      inner.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+
+      covers.setAttribute('tabindex', '-1');
+      covers.focus({ preventScroll: true });
+
+      /* На телефоне движение уже запускает CSS */
+      if (
+        reducedMotion.matches ||
+        window.matchMedia('(max-width: 639px)').matches
+      ) return;
+
+      /* На компьютере карточки плавно собираются в сетку */
+      cards.forEach(function (card, index) {
+        var after = card.getBoundingClientRect();
+        var first = before[index];
+        var wasVisible = first.width > 0;
+
+        var startTransform = wasVisible
+          ? 'translate(' +
+          (first.left - after.left) + 'px, ' +
+          (first.top - after.top) + 'px) scale(' +
+          (first.width / after.width) + ')'
+          : 'translateY(24px) scale(0.96)';
+
+        card.animate(
+          [
+            {
+              transformOrigin: '0 0',
+              transform: startTransform,
+              opacity: wasVisible ? 1 : 0
+            },
+            {
+              transformOrigin: '0 0',
+              transform: 'none',
+              opacity: 1
+            }
+          ],
+          {
+            duration: 650,
+            delay: index * 35,
+            easing: 'cubic-bezier(.22, 1, .36, 1)',
+            fill: 'backwards'
+          }
+        );
+      });
     });
   }
 
