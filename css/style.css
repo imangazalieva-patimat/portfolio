@@ -1251,7 +1251,8 @@ body {
 .gallery {
   background: var(--bg);
   padding: 10px 0 60px;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .gallery__inner {
